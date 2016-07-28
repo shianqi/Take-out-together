@@ -16,7 +16,7 @@ def get_shop_list(lat, lng):
         shop_info.shop_name = shop.get('name')
         shop_info.native_url = 'meituanwaimai://waimai.meituan.com/menu?restaurant_id=' + str(shop.get('id')) + '&poiname='
         shop_info.deliver_time = shop.get('avg_delivery_time')
-        shop_info.distance = shop.get('distance')
+        shop_info.distance = int(shop.get('primitiveDistance'))
         shop_info.logo_url = shop.get('pic_url_square')
         shop_info.take_out_cost = shop.get('shipping_fee')
         shop_info.take_out_price = shop.get('min_price')

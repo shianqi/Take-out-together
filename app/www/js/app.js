@@ -52,41 +52,41 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
 			// Each tab has its own nav history stack:
 
-			.state('tab.dash', {
-				url: '/dash',
+			.state('tab.location', {
+				url: '/location',
 				views: {
-					'tab-dash': {
-						templateUrl: 'templates/tab-dash.html',
-						controller: 'DashCtrl'
+					'tab-location': {
+						templateUrl: 'templates/tab-location.html',
+						controller: 'LocationCtrl'
 					}
 				}
 			})
 
-			.state('tab.dash-newLocation', {
-				url: '/dash/newLocation',
+			.state('tab.location-newLocation', {
+				url: '/location/newLocation',
 				views: {
-					'tab-dash': {
+					'tab-location': {
 						templateUrl: 'templates/tab-newLocation.html',
-						controller: 'DashCtrl'
+						controller: 'LocationCtrl'
 					}
 				}
 			})
 
-			.state('tab.chats', {
-				url: '/chats',
+			.state('tab.takeOuts', {
+				url: '/takeOuts',
 				views: {
-					'tab-chats': {
-						templateUrl: 'templates/tab-chats.html',
-						controller: 'ChatsCtrl'
+					'tab-takeOuts': {
+						templateUrl: 'templates/tab-takeOut.html',
+						controller: 'TakeOutsCtrl'
 					}
 				}
 			})
-			.state('tab.chat-detail', {
-				url: '/chats/:chatId',
+			.state('tab.takeOut-detail', {
+				url: '/takeOuts/:takeOutId',
 				views: {
-					'tab-chats': {
-						templateUrl: 'templates/chat-detail.html',
-						controller: 'ChatDetailCtrl'
+					'tab-takeOuts': {
+						templateUrl: 'templates/takeOut-detail.html',
+						controller: 'TakeOutDetailCtrl'
 					}
 				}
 			})
@@ -102,6 +102,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 			});
 
 		// if none of the above states are matched, use this as the fallback
-		$urlRouterProvider.otherwise('/tab/dash');
+		$urlRouterProvider.otherwise('/tab/location');
 
 	});

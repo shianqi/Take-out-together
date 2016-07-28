@@ -2,6 +2,7 @@ from django.test import TestCase
 
 import time
 import httplib2
+from web.tool.loc_tool import gaode_to_baidu
 # Create your tests here.
 print(int(time.time()*1000))
 
@@ -30,4 +31,5 @@ def meituan_post():
     # print(decode(content.get('data')))
     print(len(data))
     print(result)
-meituan_post()
+
+print(gaode_to_baidu('111.688927','40.81443'))

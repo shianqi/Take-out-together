@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-	.controller('ChatsCtrl', function($scope, Chats, $state) {
+	.controller('TakeOutsCtrl', function($scope, TakeOuts, $state) {
 		// With the new view caching in Ionic, Controllers are only called
 		// when they are recreated or on app start, instead of every page change.
 		// To listen for when this page is active (for example, to refresh data),
@@ -9,20 +9,20 @@ angular.module('starter.controllers', [])
 		//$scope.$on('$ionicView.enter', function(e) {
 		//});
 
-		$scope.chats = Chats.all();
-		$scope.remove = function(chat) {
-			Chats.remove(chat);
+		$scope.takeOuts = TakeOuts.all();
+		$scope.remove = function(takeOut) {
+			TakeOuts.remove(takeOut);
 		};
 		$scope.getLocation = function () {
-			$state.go('tab.dash');
+			$state.go('tab.location');
 		};
 	})
 
-	.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-		$scope.chat = Chats.get($stateParams.chatId);
+	.controller('TakeOutDetailCtrl', function($scope, $stateParams, TakeOuts) {
+		$scope.takeOut = TakeOuts.get($stateParams.takeOutId);
 	})
 
-	.controller('DashCtrl', function($scope, $rootScope, $state) {
+	.controller('LocationCtrl', function($scope, $rootScope, $state) {
 		var locationStorage = localStorage.getItem('location');
 		if(!locationStorage){
 			locationStorage = 'A'
@@ -38,7 +38,7 @@ angular.module('starter.controllers', [])
 		 * 跳转到获取新坐标
          */
 		$scope.goNewLocation = function () {
-			$state.go('tab.dash-newLocation');
+			$state.go('tab.location-newLocation');
 		};
 		$scope.locationString = {
 

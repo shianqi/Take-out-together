@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/TakeOutTogetherWeb.iml" filepath="$PROJECT_DIR$/.idea/TakeOutTogetherWeb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Take-out-together.iml" filepath="$PROJECT_DIR$/.idea/Take-out-together.iml" />
     </modules>
   </component>
 </project>

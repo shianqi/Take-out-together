@@ -1,0 +1,9 @@
+workspace.xml
+TakeOutTogetherWeb/.idea/workspace.xml
+/TakeOutTogetherWeb/.idea/workspace.xml
+/workspace.xml
+/*.pyc
+*.pyc
+TakeOutTogetherWeb/web/__pycache__/*.pyc
+/TakeOutTogetherWeb/web/__pycache__/*.pyc
+

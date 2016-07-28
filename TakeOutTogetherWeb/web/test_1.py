@@ -1,6 +1,8 @@
 import httplib2
 import time
-from web.tool import geo_tool
+from web.tool import meituan_tool
+from web.tool import geo_tool, json_tool
+from web.crawler import meituan_crawler
 # print(str(int(time.time() * 1000)))
 # http = httplib2.Http()
 # url = 'http://waimaiapi.meituan.com/api/v6/poi/filter?utm_medium=android&utm_content=866328026443372&utm_term=40604&utm_source=1011&ci=139&utm_campaign=AwaimaiBwaimaiGhomepage&uuid=AFF2123C2D6E56EBBA147FAA0A114A2FA3124CC425AF486E01FE6FA4ECB370F8&__vhost=api.waimai.meituan.com&__skck=6a375bce8c66a0dc293860dfa83833ef&__skts=1469690167201&__skua=d41d8cd98f00b204e9800998ecf8427e&__skno=d58e5c03-5b7e-40c8-9583-00f0bbc139ca&__skcy=XL5euL4GCvxgeOTU6LGzS5dznLE%3D'
@@ -9,7 +11,10 @@ from web.tool import geo_tool
 # response, content = http.request(url, method='POST', body=body, headers=headers)
 # content = content.decode('utf-8')
 # print(content)
-print(geo_tool.wgs84togcj02(111.688658, 40.814591))
+# print(meituan_tool.post(40.814591, 111.688658))
+mlist = meituan_crawler.get_shop_list(40.814591, 111.688658)
+for m in mlist:
+    print(json_tool.class_to_dict(m))
 #acture_lng 111688658
 #lng 111689245
 #lng2 111689245

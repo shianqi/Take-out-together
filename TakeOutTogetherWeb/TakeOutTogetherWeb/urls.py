@@ -1,4 +1,4 @@
-from web.views import  index,loc
+from web.views import  index,loc,t
 
 """TakeOutTogetherWeb URL Configuration
 
@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^index.html',index),
     url(r'^loc.html',loc),
+    url(r't',t),
 ]

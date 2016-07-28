@@ -2,6 +2,7 @@ from web.tool import json_tool
 from django.http import HttpResponse
 from web.crawler import baidu_crawler
 from web.tool import loc_tool
+from django.shortcuts import render_to_response
 
 # Create your views here.
 def index(request):
@@ -20,3 +21,6 @@ def loc(request):
     result5 = loc_tool.geocode('北京市朝阳区朝阳公园')
     print (result1, result2, result3, result4, result5)
     return HttpResponse('hello world')
+
+def t(request):
+    return render_to_response('tiaozhuan.html')

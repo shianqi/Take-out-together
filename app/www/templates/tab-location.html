@@ -13,7 +13,8 @@
 		<ion-list>
 			<a class="item item-icon-right" href="#">
 				定位中...
-				<span class="icon ion-ios-refresh-empty" ng-click="refurbish()"></span>
+				<ion-spinner class="icon" icon="dots" ng-click="refurbish()" style="display:{{isLoading(1)||'none'}};"></ion-spinner>
+				<span class="icon ion-ios-refresh-empty" ng-click="refurbish()" style="display:{{isLoading(2)||'auto'}};"></span>
 			</a>
 		</ion-list>
 		<div class="item item-divider">

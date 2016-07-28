@@ -1,16 +1,25 @@
-<ion-view view-title="Chats">
-  <ion-content>
-    <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}}">
-        <img ng-src="{{chat.face}}">
-        <h2>{{chat.name}}</h2>
-        <p>{{chat.lastText}}</p>
-        <i class="icon ion-chevron-right icon-accessory"></i>
+<ion-view hide-nav-bar="true">
+	<ion-header-bar class="row bar bar-header bar-stable">
+		<button class="button button-small button-outline button-stable col col-100"
+				style="border-radius: 15px; line-height: 20px; overflow: hidden"
+				ng-click="getLocation()">
+			<p style="line-height: 34px; overflow: hidden">送至：{{$root.hello||'定位中...'}}</p>
+		</button>
+	</ion-header-bar>
 
-        <ion-option-button class="button-assertive" ng-click="remove(chat)">
-          Delete
-        </ion-option-button>
-      </ion-item>
-    </ion-list>
-  </ion-content>
+	<ion-content>
+		<ion-refresher pulling-text="Pull to refresh..." refreshing-text="Refreshing!"  on-refresh="doRefresh()"></ion-refresher>
+		<ion-list>
+			<ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}}">
+				<img ng-src="{{chat.face}}">
+				<h2>{{chat.name}}</h2>
+				<p>{{chat.lastText}}</p>
+				<i class="icon ion-chevron-right icon-accessory"></i>
+
+				<ion-option-button class="button-assertive" ng-click="remove(chat)">
+					Delete
+				</ion-option-button>
+			</ion-item>
+		</ion-list>
+	</ion-content>
 </ion-view>

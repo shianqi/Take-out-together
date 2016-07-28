@@ -1,17 +1,31 @@
-<ion-view view-title="Dashboard">
-  <ion-content class="padding">
-    <h2>Welcome to Ionic</h2>
-    <p>
-    This is the Ionic starter for tabs-based apps. For other starters and ready-made templates, check out the <a href="http://market.ionic.io/starters" target="_blank">Ionic Market</a>.
-    </p>
-    <p>
-      To edit the content of each tab, edit the corresponding template file in <code>www/templates/</code>. This template is <code>www/templates/tab-dash.html</code>
-    </p>
-    <p>
-    If you need help with your app, join the Ionic Community on the <a href="http://forum.ionicframework.com" target="_blank">Ionic Forum</a>. Make sure to <a href="http://twitter.com/ionicframework" target="_blank">follow us</a> on Twitter to get important updates and announcements for Ionic developers.
-    </p>
-    <p>
-      For help sending push notifications, join the <a href="https://apps.ionic.io/signup" target="_blank">Ionic Platform</a> and check out <a href="http://docs.ionic.io/docs/push-overview" target="_blank">Ionic Push</a>. We also have other services available.
-    </p>
-  </ion-content>
+<ion-view hide-nav-bar="true">
+	<ion-header-bar class="row bar bar-header bar-stable">
+		<button class="button button-small button-outline button-stable col col-100" style="border-radius: 15px; line-height: 20px; overflow: hidden">
+			<p style="line-height: 34px; overflow: hidden">送至：{{$root.hello||'定位中...'}}</p>
+		</button>
+	</ion-header-bar>
+
+	<ion-content>
+
+		<div class="item item-divider">
+			定位地点
+		</div>
+		<ion-list>
+			<a class="item item-icon-right" href="#">
+				定位中...
+				<span class="icon ion-ios-refresh-empty" ng-click="refurbish()"></span>
+			</a>
+		</ion-list>
+		<div class="item item-divider">
+			附近地点
+			<span class="item-note">
+			  	更多 >
+			</span>
+		</div>
+		<ion-list>
+			<a class="item item-icon-right" href="#">
+				地点1
+			</a>
+		</ion-list>
+	</ion-content>
 </ion-view>

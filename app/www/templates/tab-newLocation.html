@@ -1,0 +1,15 @@
+<ion-view view-title="添加新位置">
+	<ion-content>
+		<ion-list>
+			<div class="item item-input-inset">
+				<label class="item-input-wrapper">
+					<input type="text" placeholder="地点" ng-model="locationString.string" ng-change="locationStringChange()">
+				</label>
+			</div>
+		</ion-list>
+		<ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}}">
+			<h2>{{chat.name}}</h2>
+			<p>{{chat.lastText}}</p>
+		</ion-item>
+	</ion-content>
+</ion-view>

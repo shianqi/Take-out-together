@@ -56,7 +56,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 				url: '/dash',
 				views: {
 					'tab-dash': {
-						templateUrl: 'templates/tab-dash.html',
+						templateUrl: 'templates/tab-location.html',
 						controller: 'DashCtrl'
 					}
 				}
@@ -76,7 +76,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 				url: '/chats',
 				views: {
 					'tab-chats': {
-						templateUrl: 'templates/tab-chats.html',
+						templateUrl: 'templates/tab-takeOut.html',
 						controller: 'ChatsCtrl'
 					}
 				}
@@ -85,7 +85,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 				url: '/chats/:chatId',
 				views: {
 					'tab-chats': {
-						templateUrl: 'templates/chat-detail.html',
+						templateUrl: 'templates/takeOut-detail.html',
 						controller: 'ChatDetailCtrl'
 					}
 				}

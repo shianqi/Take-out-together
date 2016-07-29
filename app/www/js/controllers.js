@@ -22,8 +22,9 @@ angular.module('starter.controllers', [])
 		$scope.takeOut = TakeOuts.get($stateParams.takeOutId);
 	})
 
-	.controller('LocationCtrl', function($scope, $rootScope, $state) {
+	.controller('LocationCtrl', function($scope, $rootScope, $state,Location) {
 		var locationStorage = localStorage.getItem('location');
+		$rootScope.isLoad=false;
 		if(!locationStorage){
 			locationStorage = 'A'
 		}
@@ -47,8 +48,25 @@ angular.module('starter.controllers', [])
 			console.log($scope.locationString);
 		};
 		$scope.refurbish = function (){
-			$rootScope.hello = 'success';
+			Location.getLocation();
 		};
+		$scope.isLoading = function (num) {
+			if(num==1){
+				if($rootScope.isLoad==true){
+					return 'auto';
+				}
+				if($rootScope.isLoad==false){
+					return 'none';
+				}
+			}else{
+				if($rootScope.isLoad==true){
+					return 'none';
+				}
+				if($rootScope.isLoad==false){
+					return 'auto';
+				}
+			}
+		}
 	})
 
 	.controller('AccountCtrl', function($scope) {

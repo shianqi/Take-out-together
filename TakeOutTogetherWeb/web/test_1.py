@@ -12,8 +12,9 @@ from web.crawler import meituan_crawler, ele_crawler
 # content = content.decode('utf-8')
 # print(content)
 # print(meituan_tool.post(40.814591, 111.688658))
-mlist = meituan_crawler.get_shop_list(40.814591, 111.688658)
-print(ele_crawler.get_shop_list())
+l = ele_crawler.get_shop_list(40.814591, 111.688658)
+print(len(l))
+print(json_tool.class_to_json(l));
 #acture_lng 111688658
 #lng 111689245
 #lng2 111689245

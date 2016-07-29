@@ -2,7 +2,7 @@ import json
 
 def class_to_json(obj):
     dict = class_to_dict(obj)
-    print(dict)
+    # print(dict)
     json_str = json.dumps(dict).replace('\\\\','\\')
     return json_str
 

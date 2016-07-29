@@ -8,3 +8,4 @@ class Shop_info:
     take_out_price = 0
     welfare = []
     source = ''
+    weight = 0.0

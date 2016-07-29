@@ -3,14 +3,28 @@ from django.http import HttpResponse
 from web.crawler import baidu_crawler,meituan_crawler
 from web.tool import loc_tool
 from django.shortcuts import render_to_response
+from web.tool.weight_tool import weight_cal
 
 # Create your views here.
 def index(request):
+    lat = request.GET.get('lat')
+    lng = request.GET.get('lng')
 
-    list = baidu_crawler.get_shop_list(0,0)
-    list1 = meituan_crawler.get_shop_list(40.81443,111.688927)
+    lat , lng = 111.688879,40.814422
+
+    print(float(lat))
+    print(float(lng))
+
+    list = baidu_crawler.get_shop_list(lat,lng)
+    list1 = meituan_crawler.get_shop_list(lng,lat)
     print(len(list1))
     list.extend(list1)
+
+    for shop_info in list:
+        shop_info.weight = weight_cal(shop_info)
+
+    list.sort(key=lambda  x:(x.weight))
+    list.reverse()
 
     json_str = json_tool.class_to_json(list)
 

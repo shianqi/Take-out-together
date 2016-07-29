@@ -81,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'takeouttogether',
         'USER':'root',
-        'PASSWORD':'123456',
+        'PASSWORD':'',
         'HOST':'',
         'PORT':'',
     }

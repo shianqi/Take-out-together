@@ -1,5 +1,8 @@
 angular.module('starter.controllers', [])
 
+	/**
+ 	* 外卖页面控制器
+ 	*/
 	.controller('TakeOutsCtrl', function($scope, TakeOuts, $state) {
 		// With the new view caching in Ionic, Controllers are only called
 		// when they are recreated or on app start, instead of every page change.
@@ -22,16 +25,27 @@ angular.module('starter.controllers', [])
 		$scope.takeOut = TakeOuts.get($stateParams.takeOutId);
 	})
 
+
+	/**
+	 * 定位页面控制器
+     */
 	.controller('LocationCtrl', function($scope, $rootScope, $state) {
-		localStorage.setItem('location',JSON.stringify($scope.settings));
-		$rootScope.location = {
-			isLoad: false,
+		var locationStorage = JSON.parse(localStorage.getItem('locations'));
+		if(!locationStorage){
+			locationStorage = {
+				isLoad: false,
+				Lng: 0,
+				Lat: 0,
+				name: '未选定'
+			}
+		}
+		$rootScope.location = locationStorage;
+
+		$rootScope.gaoDeLocation = {
 			Lng: 0,
 			Lat: 0,
-			name: '未选定'
+			name: '未定位'
 		};
-
-
 
 		/**
 		 * 跳转到获取新坐标
@@ -59,7 +73,7 @@ angular.module('starter.controllers', [])
 		};
 
 
-		$scope.refurbish = function (){
+		$scope.refurbish = function ($scope){
 			$rootScope.location.isLoad = true;
 			$rootScope.location.name = '定位中...';
 
@@ -91,6 +105,10 @@ angular.module('starter.controllers', [])
 			function onComplete(data) {
 				$rootScope.location.name = (data.position.getLng()+' '+data.position.getLat());
 				$rootScope.location.isLoad = false;
+				$rootScope.gaoDeLocation.name = (data.position.getLng()+' '+data.position.getLat());
+				$rootScope.gaoDeLocation.Lng = data.position.getLng();
+				$rootScope.gaoDeLocation.Lat = data.position.getLat();
+				localStorage.setItem('locations',JSON.stringify($rootScope.location));
 				$rootScope.$apply();
 			}
 			//解析定位错误信息

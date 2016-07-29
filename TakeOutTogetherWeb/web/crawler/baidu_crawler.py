@@ -23,11 +23,12 @@ def get_shop_list(lat, lng):
         shop_info.take_out_cost = shop.get('takeout_cost')
         shop_info.take_out_price = shop.get('takeout_price')
         # 计算折扣信息
+        welfare_str_list = []
         welfare_act_infos = shop.get('welfare_act_info')
         for welfare_act_info in welfare_act_infos:
             if welfare_act_info.get('type') == 'jian':
                 welfare_msg = welfare_act_info.get('msg')
-        welfare_str_list = re.findall(r"\d+\.?\d*",welfare_msg)
+                welfare_str_list = re.findall(r"\d+\.?\d*",welfare_msg)
 
         welfare_list = []
         for welfare_str in welfare_str_list:

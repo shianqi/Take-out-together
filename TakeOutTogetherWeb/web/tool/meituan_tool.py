@@ -40,6 +40,8 @@ def encodeGeo(latitude, longitude, precision=12):
     Encode a position given in float arguments latitude, longitude to
     a geohash which will have the character count precision.
     """
+    latitude = float(latitude)
+    longitude = float(longitude)
     lat_interval, lon_interval = (-90.0, 90.0), (-180.0, 180.0)
     geohash = []
     bits = [ 16, 8, 4, 2, 1 ]

@@ -1,8 +1,9 @@
 from django.test import TestCase
+from web.tool.meituan_tool import encodeGeo
 
 import time
 import httplib2
-from web.tool.loc_tool import gaode_to_baidu
+from web.tool.loc_tool import gaode_to_baidu09mc
 # Create your tests here.
 print(int(time.time()*1000))
 
@@ -32,4 +33,4 @@ def meituan_post():
     print(len(data))
     print(result)
 
-print(gaode_to_baidu('111.688927','40.81443'))
+print(encodeGeo(40.814444,111.689226))

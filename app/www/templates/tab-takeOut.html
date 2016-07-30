@@ -11,9 +11,9 @@
 		<ion-refresher pulling-text="Pull to refresh..." refreshing-text="Refreshing!"  on-refresh="doRefresh()"></ion-refresher>
 		<ion-list>
 			<ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="takeOut in takeOuts" type="item-text-wrap" href="#/tab/takeOuts/{{takeOut.id}}">
-				<img ng-src="{{takeOut.face}}">
-				<h2>{{takeOut.name}}</h2>
-				<p>{{takeOut.lastText}}</p>
+				<img ng-src="{{takeOut.logo_url}}">
+				<h2>{{takeOut.shop_name}}</h2>
+				<p>{{takeOut.native_url}}</p>
 				<i class="icon ion-chevron-right icon-accessory"></i>
 
 				<ion-option-button class="button-assertive" ng-click="remove(takeOut)">

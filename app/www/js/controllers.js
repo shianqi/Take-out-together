@@ -3,21 +3,36 @@ angular.module('starter.controllers', [])
 	/**
  	* 外卖页面控制器
  	*/
-	.controller('TakeOutsCtrl', function($scope, TakeOuts, $state) {
-		// With the new view caching in Ionic, Controllers are only called
-		// when they are recreated or on app start, instead of every page change.
-		// To listen for when this page is active (for example, to refresh data),
-		// listen for the $ionicView.enter event:
-		//
-		//$scope.$on('$ionicView.enter', function(e) {
-		//});
+	.controller('TakeOutsCtrl', function($scope, TakeOuts, $state, $rootScope ) {
+		/**
+		 * 加载上次的地址信息
+         */
+		var locationStorage = JSON.parse(localStorage.getItem('locations'));
+		if(!locationStorage){
+			locationStorage = {
+				isLoad: false,
+				Lng: 0,
+				Lat: 0,
+				name: '未选定'
+			}
+		}
+		$rootScope.location = locationStorage;
 
-		$scope.takeOuts = TakeOuts.all();
+		TakeOuts.all().then(function (result) {
+			$scope.takeOuts = result;
+		});
 		$scope.remove = function(takeOut) {
 			TakeOuts.remove(takeOut);
 		};
 		$scope.getLocation = function () {
 			$state.go('tab.location');
+		};
+
+		/**
+		 * 下拉刷新执行操作
+         */
+		$scope.doRefresh = function () {
+			$scope.$broadcast('scroll.refreshComplete');
 		};
 	})
 
@@ -73,11 +88,23 @@ angular.module('starter.controllers', [])
 			}
 		};
 
+		$scope.changeLocation = function (newLocation) {
+			$rootScope.location.Lng = newLocation.location.lng;
+			$rootScope.location.Lat = newLocation.location.lat;
+			$rootScope.location.name = newLocation.name;
+			localStorage.setItem('locations',JSON.stringify($rootScope.location));
+		};
+
+		$scope.changeLocationToGaoLocation = function () {
+			$rootScope.location.Lng = $rootScope.gaoDeLocation.Lng;
+			$rootScope.location.Lat = $rootScope.gaoDeLocation.Lat;
+			$rootScope.location.name = $rootScope.gaoDeLocation.name;
+			localStorage.setItem('locations',JSON.stringify($rootScope.location));
+		};
 
 		$scope.refurbish = function (){
 			$rootScope.location.isLoad = true;
 			$rootScope.location.name = '定位中...';
-
 
 			var map, geolocation;
 			map = new AMap.Map('container', {
@@ -104,7 +131,13 @@ angular.module('starter.controllers', [])
 			});
 			//解析定位结果
 			function onComplete(data) {
-				regeocoder(data);
+				$rootScope.location.isLoad = false;
+				$rootScope.location.Lng = data.position.getLng();
+				$rootScope.location.Lat = data.position.getLat();
+				$rootScope.gaoDeLocation.Lng = data.position.getLng();
+				$rootScope.gaoDeLocation.Lat = data.position.getLat();
+				$rootScope.$apply();
+				POISearch();
 			}
 			//解析定位错误信息
 			function onError(data) {
@@ -116,37 +149,12 @@ angular.module('starter.controllers', [])
 				$rootScope.$apply();
 			}
 
-			 //已知点坐标
-			//逆地理编码
-			function regeocoder(data) {
-				var lnglatXY = [data.position.getLng(), data.position.getLat()];
-				var geocoder = new AMap.Geocoder({
-					radius: 1000,
-					extensions: "all"
-				});
-				geocoder.getAddress(lnglatXY, function(status, result) {
-					if (status === 'complete' && result.info === 'OK') {
-						var address = result.regeocode.formattedAddress; //返回地址描述
-						$rootScope.location.isLoad = false;
-						$rootScope.location.Lng = data.position.getLng();
-						$rootScope.location.Lat = data.position.getLat();
-						$rootScope.location.name = address;
-						$rootScope.gaoDeLocation.Lng = data.position.getLng();
-						$rootScope.gaoDeLocation.Lat = data.position.getLat();
-						$rootScope.gaoDeLocation.name = address;
-						localStorage.setItem('locations',JSON.stringify($rootScope.location));
-						$rootScope.$apply();
-						POISearch();
-					}
-				});
-			}
-
 			function POISearch(){
 				AMap.service(["AMap.PlaceSearch"], function() {
 					var placeSearch = new AMap.PlaceSearch({ //构造地点查询类
-						pageSize: 5,
-						type: '汽车服务|汽车销售|汽车维修|摩托车服务|餐饮服务|购物服务|生活服务|体育休闲服务|' +
-						'医疗保健服务|住宿服务|风景名胜|商务住宅|政府机构及社会团体|科教文化服务|交通设施服务|' +
+						pageSize: 8,
+						type:'汽车服务|汽车销售|汽车维修|摩托车服务|餐饮服务|购物服务|生活服务|体育休闲服务|' +
+						'医疗保健服务|住宿服务|商务住宅|政府机构及社会团体|科教文化服务|' +
 						'金融保险服务|公司企业|道路附属设施',
 						pageIndex: 1,
 						city: "all",
@@ -155,9 +163,11 @@ angular.module('starter.controllers', [])
 					});
 
 					var cpoint = [$rootScope.gaoDeLocation.Lng, $rootScope.gaoDeLocation.Lat]; //中心点坐标
-					placeSearch.searchNearBy('', cpoint, 30, function(status, result) {
-						$rootScope.nearByLocations = result.poiList.pois;
-						console.log(JSON.stringify(result.poiList.pois))
+					placeSearch.searchNearBy('', cpoint, 200, function(status, result) {
+						$rootScope.location.name = result.poiList.pois[0].name;
+						$rootScope.gaoDeLocation.name = result.poiList.pois[0].name;
+						localStorage.setItem('locations',JSON.stringify($rootScope.location));
+						$rootScope.nearByLocations = result.poiList.pois.slice(1);
 						$rootScope.$apply();
 					});
 				});
@@ -165,7 +175,7 @@ angular.module('starter.controllers', [])
 		};
 	})
 
-	.controller('AccountCtrl', function($scope) {
+	.controller('AccountCtrl', function($scope, $rootScope) {
 		var settingsStorage = JSON.parse(localStorage.getItem('settings'));
 		if(!settingsStorage){
 			settingsStorage = {
@@ -175,8 +185,8 @@ angular.module('starter.controllers', [])
 			}
 		}
 
-		$scope.settings = settingsStorage;
+		$rootScope.settings = settingsStorage;
 		$scope.settingsChange = function () {
-			localStorage.setItem('settings',JSON.stringify($scope.settings));
+			localStorage.setItem('settings',JSON.stringify($rootScope.settings));
 		};
 	});

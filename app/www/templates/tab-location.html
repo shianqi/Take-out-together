@@ -11,7 +11,7 @@
 			定位地点
 		</div>
 		<ion-list>
-			<a class="item item-icon-right" href="#">
+			<a class="item item-icon-right" ng-click="changeLocationToGaoLocation()">
 				{{$root.gaoDeLocation.name}}
 				<ion-spinner class="icon" icon="dots" ng-click="refurbish()" style="display:{{isLoading(1)||'none'}};"></ion-spinner>
 				<span class="icon ion-ios-refresh-empty" ng-click="refurbish()" style="display:{{isLoading(2)||'auto'}};"></span>
@@ -24,9 +24,9 @@
 			</span>
 		</div>
 		<ion-list>
-			<ion-item class="item item-icon-right" ng-repeat="nearByLocation in $root.nearByLocations" type="item-text-wrap"">
+			<ion-item class="item item-icon-right" ng-repeat="nearByLocation in $root.nearByLocations" ng-click="changeLocation(nearByLocation)">
 				<h2>{{nearByLocation.name}}</h2>
-				<p>{{nearByLocation.address}}</p>
+				<p>地址：{{nearByLocation.address||'未知'}}</p>
 			</ion-item>
 		</ion-list>
 	</ion-content>

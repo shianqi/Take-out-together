@@ -20,7 +20,10 @@ def get_shop_list(lat, lng):
     native_url = 'eleme://restaurant?restaurant_id={id}&animation_type=1'
     shop_info_list = []
     for shop in content:
+
         shop_info = Shop_info()
+        shop_info.month_sale_num = shop.get('month_sales')
+        shop_info.shop_id = 'ELE' + str(shop.get('id'))
         shop_info.shop_name = shop.get('name')
         shop_info.native_url = native_url.replace('{id}', str(shop.get('id')))
         shop_info.deliver_time = shop.get('order_lead_time')

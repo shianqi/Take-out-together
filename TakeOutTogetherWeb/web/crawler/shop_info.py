@@ -9,3 +9,5 @@ class Shop_info:
     welfare = []
     source = ''
     weight = 0.0
+    shop_id = ''
+    month_sale_num = 0

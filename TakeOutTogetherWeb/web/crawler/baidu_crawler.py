@@ -17,7 +17,6 @@ def get_shop_list(lat, lng):
     url = url.replace('{lat}',str(lng))
     url = url.replace('{lng}',str(lat))
 
-    print(url)
 
     body = 'lat=0.0&lng=0.0&count=20&page=1&bduss=NA&stoken=bdwm&sortby=&taste=&city_id=&promotion=&return_type=launch'
     headers = {'Content-Type': 'application/x-www-form-urlencoded', 'Accept-Encoding': 'gzip', 'User-Agent': 'okhttp/3.2.0'}
@@ -29,6 +28,7 @@ def get_shop_list(lat, lng):
     shop_info_list = []
     for shop in shops:
         shop_info = Shop_info()
+        shop_info.month_sale_num = shop.get('saled_month')
         shop_info.shop_name = shop.get('shop_name')
         shop_info.native_url = shop.get('bdwm_url').replace('\\','').replace('\\','')
         shop_info.deliver_time = shop.get('delivery_time')
@@ -36,6 +36,7 @@ def get_shop_list(lat, lng):
         shop_info.logo_url = shop.get('logo_url')[0:69].replace('\\','')
         shop_info.take_out_cost = shop.get('takeout_cost')
         shop_info.take_out_price = shop.get('takeout_price')
+        shop_info.id = 'BD_' + shop.get('shop_id')
         # 计算折扣信息
         welfare_str_list = []
         welfare_act_infos = shop.get('welfare_act_info')

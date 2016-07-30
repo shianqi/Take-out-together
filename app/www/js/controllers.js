@@ -21,6 +21,7 @@ angular.module('starter.controllers', [])
 		TakeOuts.all().then(function (result) {
 			$scope.takeOuts = result;
 		});
+
 		$scope.remove = function(takeOut) {
 			TakeOuts.remove(takeOut);
 		};
@@ -32,12 +33,19 @@ angular.module('starter.controllers', [])
 		 * 下拉刷新执行操作
          */
 		$scope.doRefresh = function () {
-			$scope.$broadcast('scroll.refreshComplete');
+			TakeOuts.all().then(function (result) {
+				$scope.takeOuts = result;
+				$scope.$broadcast('scroll.refreshComplete');
+			});
 		};
 	})
 
 	.controller('TakeOutDetailCtrl', function($scope, $stateParams, TakeOuts) {
 		$scope.takeOut = TakeOuts.get($stateParams.takeOutId);
+
+		$scope.transmit = function (url) {
+			location.href=url;
+		};
 	})
 
 

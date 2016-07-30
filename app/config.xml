@@ -15,10 +15,16 @@
 	<access origin="sms:*" launch-external="yes"/>
 	<access origin="mailto:*" launch-external="yes"/>
 	<access origin="geo:*" launch-external="yes"/>
+	<access origin="bdwm:*" launch-external="yes"/>
+	<access origin="eleme:*" launch-external="yes"/>
+	<access origin="meituanwaimai:*" launch-external="yes"/>
 	<allow-intent href="tel:*"/>
 	<allow-intent href="sms:*"/>
 	<allow-intent href="mailto:*"/>
 	<allow-intent href="geo:*"/>
+	<allow-intent href="bdwm:*"/>
+	<allow-intent href="eleme:*"/>
+	<allow-intent href="meituanwaimai:*"/>
 
 	<preference name="webviewbounce" value="false"/>
 	<preference name="UIWebViewBounce" value="false"/>

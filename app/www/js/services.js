@@ -2,35 +2,7 @@ angular.module('starter.services', [])
 
 	.factory('TakeOuts', function($http, $rootScope, $q) {
 		// Might use a resource here that returns a JSON array
-
-		// Some fake testing data
-		var takeOuts = [{
-			id: 0,
-			name: 'Ben Sparrow',
-			lastText: 'You on your way?',
-			face: 'img/ben.png'
-		}, {
-			id: 1,
-			name: 'Max Lynx',
-			lastText: 'Hey, it\'s me',
-			face: 'img/max.png'
-		}, {
-			id: 2,
-			name: 'Adam Bradleyson',
-			lastText: 'I should buy a boat',
-			face: 'img/adam.jpg'
-		}, {
-			id: 3,
-			name: 'Perry Governor',
-			lastText: 'Look at my mukluks!',
-			face: 'img/perry.png'
-		}, {
-			id: 4,
-			name: 'Mike Harrington',
-			lastText: 'This is wicked good ice cream.',
-			face: 'img/mike.png'
-		}];
-
+		var takeOuts = {};
 		return {
 			all: function() {
 				var settingsStorage = JSON.parse(localStorage.getItem('settings'));
@@ -57,9 +29,9 @@ angular.module('starter.services', [])
 				var deferred = $q.defer();
 				$http.get(href)
 					.success(function(newTakeOuts) {
-						console.log(JSON.stringify(newTakeOuts));
 						deferred.resolve(newTakeOuts);
-						return newTakeOuts;
+						takeOuts = newTakeOuts;
+						console.log(JSON.stringify(newTakeOuts));
 					})
 					.finally(function() {
 						// Stop the ion-refresher from spinning
@@ -72,22 +44,13 @@ angular.module('starter.services', [])
 			},
 			get: function(takeOutId) {
 				for (var i = 0; i < takeOuts.length; i++) {
-					if (takeOuts[i].id === parseInt(takeOutId)) {
+					if (takeOuts[i].shop_id === takeOutId) {
 						return takeOuts[i];
 					}
 				}
 				return null;
 			}
 		};
-	})
-
-
-	.factory('Location',function ($rootScope) {
-		return {
-			getLocation: function () {
-
-			}
-		}
 	})
 
 

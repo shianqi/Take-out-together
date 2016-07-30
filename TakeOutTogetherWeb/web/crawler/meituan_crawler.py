@@ -12,7 +12,10 @@ def get_shop_list(lat, lng):
     shops = data.get('poilist')
     shop_info_list = []
     for shop in shops:
+
         shop_info = Shop_info()
+        shop_info.month_sale_num = shop.get('month_sale_num')
+        shop_info.shop_id = 'MT_' + str(shop.get('id'))
         shop_info.shop_name = shop.get('name')
         shop_info.native_url = 'meituanwaimai://waimai.meituan.com/menu?restaurant_id=' + str(shop.get('id')) + '&poiname='
         shop_info.deliver_time = shop.get('avg_delivery_time')
@@ -21,6 +24,7 @@ def get_shop_list(lat, lng):
         shop_info.take_out_cost = shop.get('shipping_fee')
         shop_info.take_out_price = shop.get('min_price')
         discounts = shop.get('discounts2');
+        shop_info.id = 'MT_' + str(shop.get('id'))
         for discount in discounts:
             if discount.get('type') == 6:
                 discount_msg = discount.get('info')

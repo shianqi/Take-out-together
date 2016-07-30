@@ -7,9 +7,10 @@ from web.tool.weight_tool import weight_cal
 
 # Create your views here.
 def index(request):
-
+    # lat lng 为经纬度
     lat = request.GET.get('lat')
     lng = request.GET.get('lng')
+    # 经纬度
     source = request.GET.get('source')
     source = str(source)
     lat , lng = 111.688879,40.814422
@@ -35,8 +36,20 @@ def index(request):
     list.reverse()
 
     json_str = json_tool.class_to_json(list)
+    response = HttpResponse(json_str, content_type="application/json")
+    response["Access-Control-Allow-Origin"] = "*"
+    return response
+# GET /public/common/toolbar/css/index.css HTTP/1.1
+# Host: c.csdnimg.cn
+# User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0
+# Accept: text/css,*/*;q=0.1
+# Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3
+# Accept-Encoding: gzip, deflate
+# Referer: http://blog.csdn.net/fanyuna/article/details/5568089
+# Connection: keep-alive
+# If-Modified-Since: Mon, 16 Nov 2015 10:38:49 GMT
+# Cache-Control: max-age=0
 
-    return HttpResponse(json_str, content_type="application/json")
 
 def loc(request):
     lat = 111.695549

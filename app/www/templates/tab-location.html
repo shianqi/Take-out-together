@@ -24,9 +24,10 @@
 			</span>
 		</div>
 		<ion-list>
-			<a class="item item-icon-right" href="#">
-				地点1
-			</a>
+			<ion-item class="item item-icon-right" ng-repeat="nearByLocation in $root.nearByLocations" type="item-text-wrap"">
+				<h2>{{nearByLocation.name}}</h2>
+				<p>{{nearByLocation.address}}</p>
+			</ion-item>
 		</ion-list>
 	</ion-content>
 </ion-view>

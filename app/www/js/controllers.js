@@ -30,6 +30,7 @@ angular.module('starter.controllers', [])
 	 * 定位页面控制器
      */
 	.controller('LocationCtrl', function($scope, $rootScope, $state) {
+		$rootScope.nearByLocations = {};
 		var locationStorage = JSON.parse(localStorage.getItem('locations'));
 		if(!locationStorage){
 			locationStorage = {
@@ -73,7 +74,7 @@ angular.module('starter.controllers', [])
 		};
 
 
-		$scope.refurbish = function ($scope){
+		$scope.refurbish = function (){
 			$rootScope.location.isLoad = true;
 			$rootScope.location.name = '定位中...';
 
@@ -103,19 +104,63 @@ angular.module('starter.controllers', [])
 			});
 			//解析定位结果
 			function onComplete(data) {
-				$rootScope.location.name = (data.position.getLng()+' '+data.position.getLat());
-				$rootScope.location.isLoad = false;
-				$rootScope.gaoDeLocation.name = (data.position.getLng()+' '+data.position.getLat());
-				$rootScope.gaoDeLocation.Lng = data.position.getLng();
-				$rootScope.gaoDeLocation.Lat = data.position.getLat();
-				localStorage.setItem('locations',JSON.stringify($rootScope.location));
-				$rootScope.$apply();
+				regeocoder(data);
 			}
 			//解析定位错误信息
 			function onError(data) {
 				$rootScope.location.name = '定位失败';
 				$rootScope.location.isLoad = false;
+				$rootScope.gaoDeLocation.name = '定位失败';
+				$rootScope.gaoDeLocation.Lng = 0;
+				$rootScope.gaoDeLocation.Lat = 0;
 				$rootScope.$apply();
+			}
+
+			 //已知点坐标
+			//逆地理编码
+			function regeocoder(data) {
+				var lnglatXY = [data.position.getLng(), data.position.getLat()];
+				var geocoder = new AMap.Geocoder({
+					radius: 1000,
+					extensions: "all"
+				});
+				geocoder.getAddress(lnglatXY, function(status, result) {
+					if (status === 'complete' && result.info === 'OK') {
+						var address = result.regeocode.formattedAddress; //返回地址描述
+						$rootScope.location.isLoad = false;
+						$rootScope.location.Lng = data.position.getLng();
+						$rootScope.location.Lat = data.position.getLat();
+						$rootScope.location.name = address;
+						$rootScope.gaoDeLocation.Lng = data.position.getLng();
+						$rootScope.gaoDeLocation.Lat = data.position.getLat();
+						$rootScope.gaoDeLocation.name = address;
+						localStorage.setItem('locations',JSON.stringify($rootScope.location));
+						$rootScope.$apply();
+						POISearch();
+					}
+				});
+			}
+
+			function POISearch(){
+				AMap.service(["AMap.PlaceSearch"], function() {
+					var placeSearch = new AMap.PlaceSearch({ //构造地点查询类
+						pageSize: 5,
+						type: '汽车服务|汽车销售|汽车维修|摩托车服务|餐饮服务|购物服务|生活服务|体育休闲服务|' +
+						'医疗保健服务|住宿服务|风景名胜|商务住宅|政府机构及社会团体|科教文化服务|交通设施服务|' +
+						'金融保险服务|公司企业|道路附属设施',
+						pageIndex: 1,
+						city: "all",
+						map: map,
+						panel: "panel"
+					});
+
+					var cpoint = [$rootScope.gaoDeLocation.Lng, $rootScope.gaoDeLocation.Lat]; //中心点坐标
+					placeSearch.searchNearBy('', cpoint, 30, function(status, result) {
+						$rootScope.nearByLocations = result.poiList.pois;
+						console.log(JSON.stringify(result.poiList.pois))
+						$rootScope.$apply();
+					});
+				});
 			}
 		};
 	})

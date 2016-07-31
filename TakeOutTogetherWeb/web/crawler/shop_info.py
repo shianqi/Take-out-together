@@ -11,3 +11,5 @@ class Shop_info:
     weight = 0.0
     shop_id = ''
     month_sale_num = 0
+    score = 0
+    source_img = ''

@@ -1,21 +1,19 @@
 import math
 
-def weight_cal(shop_info):
-    take_out_cost = int(shop_info.take_out_cost)
-    take_out_price = int(shop_info.take_out_price)
-    welfare = shop_info.welfare
+def weight_cal(welfare_list,take_out_price,take_out_cost):
 
+    take_out_cost = int(take_out_cost)
+    take_out_price = int(take_out_price)
 
-    weight = 0.0
-    m = 0.0
-    for i in range(int(len(welfare)/2)):
-        m = m + max(take_out_price,welfare[i*2])
-
-
-    for i in range(int(len(welfare)/2)):
-        weight = weight + math.sqrt((max(take_out_price,welfare[2*i]))/m)*100*(1-(max(take_out_price,welfare[i*2])-welfare[i*2+1]+take_out_cost)/(max(welfare[i*2],take_out_price)+take_out_cost))
     # shop_info.weight = weight
-    return weight
+    sum = 0.0
+    for welfare in welfare_list:
+        sum = sum + (welfare[1]-take_out_cost)/max(welfare[0],take_out_price)
+    if len(welfare_list) != 0:
+        sum = sum / len(welfare_list)
+    else:
+        return 0
+    return sum
 
 
 

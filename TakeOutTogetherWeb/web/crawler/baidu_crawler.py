@@ -1,7 +1,7 @@
 import httplib2
 from web.crawler.shop_info import Shop_info
 import time
-from web.tool import loc_tool
+from web.tool import loc_tool,weight_tool
 import re
 
 def get_shop_list(lat, lng):
@@ -28,6 +28,8 @@ def get_shop_list(lat, lng):
     shop_info_list = []
     for shop in shops:
         shop_info = Shop_info()
+        shop_info.source_img = './img/bd.png'
+        shop_info.score = shop.get('average_score')
         shop_info.month_sale_num = shop.get('saled_month')
         shop_info.shop_name = shop.get('shop_name')
         shop_info.native_url = shop.get('bdwm_url').replace('\\','').replace('\\','')
@@ -36,7 +38,7 @@ def get_shop_list(lat, lng):
         shop_info.logo_url = shop.get('logo_url')[0:69].replace('\\','')
         shop_info.take_out_cost = shop.get('takeout_cost')
         shop_info.take_out_price = shop.get('takeout_price')
-        shop_info.id = 'BD_' + shop.get('shop_id')
+        shop_info.shop_id = 'BD' + shop.get('shop_id')
         # 计算折扣信息
         welfare_str_list = []
         welfare_act_infos = shop.get('welfare_act_info')
@@ -46,10 +48,16 @@ def get_shop_list(lat, lng):
                 welfare_str_list = re.findall(r"\d+\.?\d*",welfare_msg)
 
         welfare_list = []
-        for welfare_str in welfare_str_list:
-            welfare_int = int(welfare_str)
-            welfare_list.append(welfare_int)
+
+        for i in range(int(len(welfare_str_list)/2)):
+            temp_welface_list = []
+            x = int(welfare_str_list[i*2])
+            y = int(welfare_str_list[i*2+1])
+            temp_welface_list.append(x)
+            temp_welface_list.append(y)
+            welfare_list.append(temp_welface_list)
         shop_info.welfare = welfare_list
         shop_info.source = 'baidu'
+        shop_info.weight= weight_tool.weight_cal(shop_info.welfare,shop_info.take_out_price,shop_info.take_out_cost)
         shop_info_list.append(shop_info)
     return shop_info_list

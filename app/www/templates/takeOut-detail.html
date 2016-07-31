@@ -12,35 +12,40 @@
 				<img ng-if='!$root.settings.enableImg' ng-src="{{::takeOut.logo_url}}">
 				<img ng-if='$root.settings.enableImg' ng-src="{{::takeOut.source_img}}">
 				<h2>{{::takeOut.shop_name}}</h2>
-				<p>
-					<a class="subdued">月售：{{::takeOut.month_sale_num+""||'unknow'}}  </a>
-					<a class="subdued">评分：{{::takeOut.score+""||'unknow'}}</a>
+				<p class="icon icon-right ion-ios-cart" style="margin-top: 20px;">
+					<a class="subdued"> 月售：{{::takeOut.month_sale_num+"份"||'unknow'}}  </a>
+				</p>
+				<p class="icon icon-right ion-ios-star">
+					<a class="subdued"> 评分：{{::takeOut.score||'评价不足'}}</a>
 				</p>
 			</div>
 
-			<a class="item" style="padding-top: 10px; padding-bottom: 10px;" ng-repeat="welfare in takeOut.welfare">
-				满：{{::welfare[0]||'unknow'}}减：{{::welfare[1]||'unknow'}}
+			<a class="item item-icon-left item-icon-right" style="" ng-repeat="welfare in takeOut.welfare">
+				<i class="icon ion-bag"></i>
+				满 {{::welfare[0]||'unknow'}} 减 {{::welfare[1]||'unknow'}}
+				<i class="icon"><span class="discount">{{(1-welfare[1]/welfare[0]).toFixed(2)+"折"||'unknow'}}</span></i>
 			</a>
 
-			<a class="item item-icon-left positive">
-				<i class="icon ion-ios-pricetags"></i>
-				起送价：{{::takeOut.take_out_price}} 元
-			</a>
-
-			<a class="item item-icon-left positive">
-				<i class="icon ion-ios-cart"></i>
-				配送费：{{::takeOut.take_out_cost}} 元
-			</a>
-
-			<a class="item item-icon-left positive">
-				<i class="icon ion-ios-timer"></i>
-				送达时长：{{::takeOut.deliver_time}} 分钟
-			</a>
-
+			<div class="item row">
+				<div class="col text-center">
+					<i class="icon ion-ios-pricetags"></i>
+					起送: {{::takeOut.take_out_price}}￥
+				</div>
+				<div class="col text-center">
+					<i class="icon ion-ios-cart"></i>
+					配送: {{::takeOut.take_out_cost}}￥
+				</div>
+				<div class="col text-center">
+					<i class="icon ion-ios-timer"></i>
+					时长: {{::takeOut.deliver_time}}min
+				</div>
+			</div>
+		</div>
+		<div class="padding">
+			<button class="button button-block button-positive" ng-click="transmit(takeOut.native_url)">
+				传 送 门
+			</button>
 		</div>
 
-		<button class="button button-block button-positive" ng-click="transmit(takeOut.native_url)">
-			>> 传送门 <<
-		</button>
 	</ion-content>
 </ion-view>

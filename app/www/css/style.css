@@ -11,3 +11,12 @@
 ion-nav-view{
 	background: #ffffff;
 }
+
+.discount{
+	font-size: 14px;
+	color: #ffffff;
+	background: #ff3b30;
+	border-radius: 5px;
+	padding: 0 5px 0 5px;
+}
+

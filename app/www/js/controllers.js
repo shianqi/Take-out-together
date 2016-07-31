@@ -7,6 +7,7 @@ angular.module('starter.controllers', [])
 
 		TakeOuts.all().then(function (result) {
 			$scope.takeOuts = result;
+			console.log(JSON.stringify(result));
 		});
 
 		$scope.remove = function(takeOut) {

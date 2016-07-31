@@ -14,17 +14,26 @@ def index(request):
     source = request.GET.get('source')
 
     list = []
-    if  source.find('baidu') >=0:
-        list_baidu = baidu_crawler.get_shop_list(lng , lat)
-        list.extend(list_baidu)
-    if source.find('meituan') >=0:
-        list_meituan = meituan_web_crawler.get_shop_list(lat, lng)
-        list.extend(list_meituan)
-    if source.find('eleme') >=0:
-        list_ele = ele_crawler.get_shop_list(lat, lng)
-        list.extend(list_ele)
+    try:
+        if  source.find('baidu') >=0:
+            list_baidu = baidu_crawler.get_shop_list(lng , lat)
+            list.extend(list_baidu)
+    except:
+        pass
 
+    try:
+        if source.find('meituan') >= 0:
+            list_meituan = meituan_web_crawler.get_shop_list(lat, lng)
+            list.extend(list_meituan)
+    except:
+        pass
 
+    try:
+        if source.find('eleme') >= 0:
+            list_ele = ele_crawler.get_shop_list(lat, lng)
+            list.extend(list_ele)
+    except:
+        pass
 
 
     list.sort(key=lambda  x:(x.weight))

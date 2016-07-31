@@ -1,23 +1,8 @@
 angular.module('starter.controllers', [])
-
 	/**
  	* 外卖页面控制器
  	*/
-	.controller('TakeOutsCtrl', function($scope, TakeOuts, $state, $rootScope ) {
-		/**
-		 * 加载上次的地址信息
-         */
-		var locationStorage = JSON.parse(localStorage.getItem('locations'));
-		if(!locationStorage){
-			locationStorage = {
-				isLoad: false,
-				Lng: 0,
-				Lat: 0,
-				name: '未选定'
-			}
-		}
-		$rootScope.location = locationStorage;
-
+	.controller('TakeOutsCtrl', function($scope, TakeOuts, $state) {
 		TakeOuts.all().then(function (result) {
 			$scope.takeOuts = result;
 		});
@@ -54,16 +39,7 @@ angular.module('starter.controllers', [])
      */
 	.controller('LocationCtrl', function($scope, $rootScope, $state) {
 		$rootScope.nearByLocations = {};
-		var locationStorage = JSON.parse(localStorage.getItem('locations'));
-		if(!locationStorage){
-			locationStorage = {
-				isLoad: false,
-				Lng: 0,
-				Lat: 0,
-				name: '未选定'
-			}
-		}
-		$rootScope.location = locationStorage;
+
 
 		$rootScope.gaoDeLocation = {
 			Lng: 0,
@@ -158,6 +134,7 @@ angular.module('starter.controllers', [])
 				$rootScope.$apply();
 			}
 
+			//附近搜索
 			function POISearch(){
 				AMap.service(["AMap.PlaceSearch"], function() {
 					var placeSearch = new AMap.PlaceSearch({ //构造地点查询类
@@ -185,16 +162,6 @@ angular.module('starter.controllers', [])
 	})
 
 	.controller('AccountCtrl', function($scope, $rootScope) {
-		var settingsStorage = JSON.parse(localStorage.getItem('settings'));
-		if(!settingsStorage){
-			settingsStorage = {
-				enableMeituan: true,
-				enableBaidu: true,
-				enableElm: true
-			}
-		}
-
-		$rootScope.settings = settingsStorage;
 		$scope.settingsChange = function () {
 			localStorage.setItem('settings',JSON.stringify($rootScope.settings));
 		};

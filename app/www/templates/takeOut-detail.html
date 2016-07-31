@@ -4,36 +4,36 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="{{takeOut.shop_name}}">
+<ion-view view-title="{{::takeOut.shop_name}}">
 	<ion-content>
 		<div class="list card">
 
 			<div class="item item-thumbnail-left">
-				<img ng-src="{{takeOut.logo_url}}">
-				<h2>{{takeOut.shop_name}}</h2>
+				<img ng-src="{{::takeOut.logo_url}}">
+				<h2>{{::takeOut.shop_name}}</h2>
 				<p>
-					<a class="subdued">月售：{{takeOut.month_sale_num+""||'unknow'}}  </a>
-					<a class="subdued">评分：{{takeOut.score+""||'unknow'}}</a>
+					<a class="subdued">月售：{{::takeOut.month_sale_num+""||'unknow'}}  </a>
+					<a class="subdued">评分：{{::takeOut.score+""||'unknow'}}</a>
 				</p>
 			</div>
 
 			<a class="item" style="padding-top: 10px; padding-bottom: 10px;" ng-repeat="welfare in takeOut.welfare">
-				满：{{welfare[0]||'unknow'}}减：{{welfare[1]||'unknow'}}
+				满：{{::welfare[0]||'unknow'}}减：{{::welfare[1]||'unknow'}}
 			</a>
 
 			<a class="item item-icon-left positive">
 				<i class="icon ion-ios-pricetags"></i>
-				起送价：{{takeOut.take_out_price}} 元
+				起送价：{{::takeOut.take_out_price}} 元
 			</a>
 
 			<a class="item item-icon-left positive">
 				<i class="icon ion-ios-cart"></i>
-				配送费：{{takeOut.take_out_cost}} 元
+				配送费：{{::takeOut.take_out_cost}} 元
 			</a>
 
 			<a class="item item-icon-left positive">
 				<i class="icon ion-ios-timer"></i>
-				送达时长：{{takeOut.deliver_time}} 分钟
+				送达时长：{{::takeOut.deliver_time}} 分钟
 			</a>
 
 		</div>

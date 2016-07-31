@@ -3,19 +3,20 @@
 		<button class="button button-small button-outline button-stable col col-100"
 				style="border-radius: 15px; line-height: 20px; overflow: hidden"
 				ng-click="getLocation()">
-			<p style="line-height: 34px; overflow: hidden">送至：{{$root.location.name||'未选定'}}</p>
+			<p style="line-height: 34px; overflow: hidden">送至：{{::$root.location.name||'未选定'}}</p>
 		</button>
 	</ion-header-bar>
 
 	<ion-content>
 		<ion-refresher pulling-text="Pull to refresh..." refreshing-text="Refreshing!"  on-refresh="doRefresh()"></ion-refresher>
 		<ion-list>
-			<ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="takeOut in takeOuts" type="item-text-wrap" href="#/tab/takeOuts/{{takeOut.shop_id}}">
-				<img ng-src="{{takeOut.logo_url}}">
-				<h2><img ng-src={{takeOut.source_img}} width="14px" height="14px"/>{{takeOut.shop_name}}</h2>
+			<ion-item class="item-remove-animate item-avatar item-icon-right" collection-repeat="takeOut in takeOuts"
+					  type="item-text-wrap" href="#/tab/takeOuts/{{takeOut.shop_id}}">
+				<img ng-src="{{::takeOut.logo_url}}">
+				<h2><img ng-src={{::takeOut.source_img}} width="14px" height="14px" style="margin-top: 3px; margin-right: 3px;"/>{{::takeOut.shop_name}}</h2>
 				<p>
-					<a class="subdued">月售：{{takeOut.month_sale_num+""||'unknow'}}  </a>
-					<a class="subdued">评分：{{takeOut.score+""||'unknow'}}</a>
+					<a class="subdued">月售：{{::takeOut.month_sale_num+""||'unknow'}}  </a>
+					<a class="subdued">评分：{{::takeOut.score+""||'unknow'}}</a>
 				</p>
 				<i class="icon ion-chevron-right icon-accessory"></i>
 

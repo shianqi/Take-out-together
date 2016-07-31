@@ -1,26 +1,17 @@
 angular.module('starter.services', [])
-
 	.factory('TakeOuts', function($http, $rootScope, $q) {
 		// Might use a resource here that returns a JSON array
 		var takeOuts = {};
 		return {
 			all: function() {
-				var settingsStorage = JSON.parse(localStorage.getItem('settings'));
-				if(!settingsStorage){
-					settingsStorage = {
-						enableMeituan: true,
-						enableBaidu: true,
-						enableElm: true
-					}
-				}
 				var source = '';
-				if(settingsStorage.enableMeituan){
+				if($rootScope.settings.enableMeituan){
 					source+='meituan';
 				}
-				if(settingsStorage.enableBaidu){
+				if($rootScope.settings.enableBaidu){
 					source+='baidu';
 				}
-				if(settingsStorage.enableElm){
+				if($rootScope.settings.enableElm){
 					source+='eleme';
 				}
 				var lat = $rootScope.location.Lat;
@@ -31,7 +22,6 @@ angular.module('starter.services', [])
 					.success(function(newTakeOuts) {
 						deferred.resolve(newTakeOuts);
 						takeOuts = newTakeOuts;
-						console.log(JSON.stringify(newTakeOuts));
 					})
 					.finally(function() {
 						// Stop the ion-refresher from spinning

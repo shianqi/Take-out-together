@@ -1,1 +1,10 @@
 /* Empty. Add your own CSS if you like */
+/*.item.active,*/
+/*.item.activated,*/
+/*.item-complex.active .item-content,*/
+/*.item-complex.activated .item-content,*/
+/*.item .item-content.active,*/
+/*.item .item-content.activated {*/
+	/*border-color: #fff;*/
+	/*background-color: #fff;*/
+/*}*/

@@ -1,7 +1,7 @@
 <ion-view hide-nav-bar="true">
 	<ion-header-bar class="row bar bar-header bar-stable">
 		<button class="button button-small button-outline button-stable col col-100" style="border-radius: 15px; line-height: 20px; overflow: hidden">
-			<p style="line-height: 34px; overflow: hidden">送至：{{$root.location.name||'定位中...'}}</p>
+			<p style="line-height: 34px; overflow: hidden">送至：{{::$root.location.name||'定位中...'}}</p>
 		</button>
 	</ion-header-bar>
 
@@ -12,7 +12,7 @@
 		</div>
 		<ion-list>
 			<a class="item item-icon-right" ng-click="changeLocationToGaoLocation()">
-				{{$root.gaoDeLocation.name}}
+				{{::$root.gaoDeLocation.name}}
 				<ion-spinner class="icon" icon="dots" ng-click="refurbish()" style="display:{{isLoading(1)||'none'}};"></ion-spinner>
 				<span class="icon ion-ios-refresh-empty" ng-click="refurbish()" style="display:{{isLoading(2)||'auto'}};"></span>
 			</a>
@@ -25,8 +25,8 @@
 		</div>
 		<ion-list>
 			<ion-item class="item item-icon-right" ng-repeat="nearByLocation in $root.nearByLocations" ng-click="changeLocation(nearByLocation)">
-				<h2>{{nearByLocation.name}}</h2>
-				<p>地址：{{nearByLocation.address||'未知'}}</p>
+				<h2>{{::nearByLocation.name}}</h2>
+				<p>地址：{{::nearByLocation.address||'未知'}}</p>
 			</ion-item>
 		</ion-list>
 	</ion-content>

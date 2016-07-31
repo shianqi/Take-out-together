@@ -113,6 +113,7 @@ angular.module('starter.controllers', [])
 		$scope.refurbish = function (){
 			$rootScope.location.isLoad = true;
 			$rootScope.location.name = '定位中...';
+			$rootScope.gaoDeLocation.name = '定位中...';
 
 			var map, geolocation;
 			map = new AMap.Map('container', {

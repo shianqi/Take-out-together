@@ -1,18 +1,24 @@
 <ion-view view-title="设置">
-  <ion-content>
-    <ion-list>
-      <div class="item item-divider">
-        外卖支持
-      </div>
-      <ion-toggle  ng-model="$root.settings.enableMeituan" ng-change="settingsChange()">
-        美团外卖
-      </ion-toggle>
-      <ion-toggle  ng-model="$root.settings.enableBaidu" ng-change="settingsChange()">
-        百度外卖
-      </ion-toggle>
-      <ion-toggle  ng-model="$root.settings.enableElm" ng-change="settingsChange()">
-        饿了吗
-      </ion-toggle>
-    </ion-list>
-  </ion-content>
+	<ion-content>
+		<ion-list>
+			<div class="item item-divider">
+				外卖支持
+			</div>
+			<ion-toggle  ng-model="$root.settings.enableMeituan" ng-change="settingsChange()">
+				美团外卖
+			</ion-toggle>
+			<ion-toggle  ng-model="$root.settings.enableBaidu" ng-change="settingsChange()">
+				百度外卖
+			</ion-toggle>
+			<ion-toggle  ng-model="$root.settings.enableElm" ng-change="settingsChange()">
+				饿了吗
+			</ion-toggle>
+			<div class="item item-divider">
+				功能设置
+			</div>
+			<ion-toggle  ng-model="$root.settings.enableMeituan" ng-change="settingsChange()">
+				无图模式
+			</ion-toggle>
+		</ion-list>
+	</ion-content>
 </ion-view>

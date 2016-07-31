@@ -11,17 +11,14 @@
 			<div class="item item-thumbnail-left">
 				<img ng-src="{{takeOut.logo_url}}">
 				<h2>{{takeOut.shop_name}}</h2>
-				<p>预计送达所需时间：{{takeOut.take_out_cost}}分钟</p>
-				<p>预计送达所需时间：{{takeOut.take_out_cost}}分钟</p>
+				<p>
+					<a class="subdued">月售：{{takeOut.month_sale_num+""||'unknow'}}  </a>
+					<a class="subdued">评分：{{takeOut.score+""||'unknow'}}</a>
+				</p>
 			</div>
 
-			<a class="item">
-				Enter phone number
-			</a>
-
-			<a class="item item-icon-left">
-				<i class="icon ion-ios-telephone"></i>
-				Enter phone number
+			<a class="item" style="padding-top: 10px; padding-bottom: 10px;" ng-repeat="welfare in takeOut.welfare">
+				满：{{welfare[0]||'unknow'}}减：{{welfare[1]||'unknow'}}
 			</a>
 
 			<a class="item item-icon-left positive">
@@ -40,8 +37,9 @@
 			</a>
 
 		</div>
+
 		<button class="button button-block button-positive" ng-click="transmit(takeOut.native_url)">
-			传送门
+			>> 传送门 <<
 		</button>
 	</ion-content>
 </ion-view>

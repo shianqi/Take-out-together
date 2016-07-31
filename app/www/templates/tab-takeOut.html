@@ -12,8 +12,11 @@
 		<ion-list>
 			<ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="takeOut in takeOuts" type="item-text-wrap" href="#/tab/takeOuts/{{takeOut.shop_id}}">
 				<img ng-src="{{takeOut.logo_url}}">
-				<h2>{{takeOut.shop_name}}</h2>
-				<p>{{takeOut.native_url}}</p>
+				<h2><img ng-src={{takeOut.source_img}} width="14px" height="14px"/>{{takeOut.shop_name}}</h2>
+				<p>
+					<a class="subdued">月售：{{takeOut.month_sale_num+""||'unknow'}}  </a>
+					<a class="subdued">评分：{{takeOut.score+""||'unknow'}}</a>
+				</p>
 				<i class="icon ion-chevron-right icon-accessory"></i>
 
 				<ion-option-button class="button-assertive" ng-click="remove(takeOut)">

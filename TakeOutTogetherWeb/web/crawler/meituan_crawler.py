@@ -12,8 +12,9 @@ def get_shop_list(lat, lng):
     shops = data.get('poilist')
     shop_info_list = []
     for shop in shops:
-
+        print(shop)
         shop_info = Shop_info()
+        shop_info.source_img = './img/mt.png'
         shop_info.month_sale_num = shop.get('month_sale_num')
         shop_info.shop_id = 'MT_' + str(shop.get('id'))
         shop_info.shop_name = shop.get('name')
@@ -24,7 +25,7 @@ def get_shop_list(lat, lng):
         shop_info.take_out_cost = shop.get('shipping_fee')
         shop_info.take_out_price = shop.get('min_price')
         discounts = shop.get('discounts2');
-        shop_info.id = 'MT_' + str(shop.get('id'))
+        shop_info.id = 'MT' + str(shop.get('id'))
         for discount in discounts:
             if discount.get('type') == 6:
                 discount_msg = discount.get('info')
@@ -34,7 +35,7 @@ def get_shop_list(lat, lng):
                     discount_list.append(int(discount_str))
                 shop_info.welfare = discount_list
                 shop_info.source = 'meituan'
-                shop_info_list.append(shop_info)
+        shop_info_list.append(shop_info)
     return shop_info_list
 
 

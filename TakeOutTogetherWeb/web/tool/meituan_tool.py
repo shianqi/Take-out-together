@@ -19,9 +19,7 @@ def post(lat, lng, index = 0):
     cookie = cookie.replace('{lat}', str(lat * 1000000))
     cookie = cookie.replace('{lng}', str(lng * 1000000))
     cookie = cookie.replace('{geohash}', encodeGeo(lat, lng))
-    print(url)
-    print(body)
-    print(cookie)
+
     # print(cookie)
     headers = {'Content-Type': 'application/x-www-form-urlencoded', 'Accept-Encoding': 'gzip',
                'User-Agent': 'okhttp/3.2.0', 'Cookie' : cookie}

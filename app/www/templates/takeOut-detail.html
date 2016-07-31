@@ -9,7 +9,8 @@
 		<div class="list card">
 
 			<div class="item item-thumbnail-left">
-				<img ng-src="{{::takeOut.logo_url}}">
+				<img ng-if='!$root.settings.enableImg' ng-src="{{::takeOut.logo_url}}">
+				<img ng-if='$root.settings.enableImg' ng-src="{{::takeOut.source_img}}">
 				<h2>{{::takeOut.shop_name}}</h2>
 				<p>
 					<a class="subdued">月售：{{::takeOut.month_sale_num+""||'unknow'}}  </a>

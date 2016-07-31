@@ -1,4 +1,56 @@
 angular.module('starter.services', [])
+	.factory('Loadings', function ($rootScope) {
+		return {
+			init: function () {
+				if(typeof($rootScope.settings)!='undefined'){
+					return;
+				}
+				//加载配置信息
+				var settingsStorage = JSON.parse(localStorage.getItem('settings'));
+				if(!settingsStorage){
+					settingsStorage = {
+						enableMeituan: true,
+						enableBaidu: true,
+						enableElm: true,
+						enableImg: true
+					}
+				}
+				$rootScope.settings = settingsStorage;
+
+				//加载定位信息
+				var locationStorage = JSON.parse(localStorage.getItem('locations'));
+				if(!locationStorage){
+					locationStorage = {
+						isLoad: false,
+						Lng: 0,
+						Lat: 0,
+						name: '未选定'
+					}
+				}
+				$rootScope.location = locationStorage;
+
+				//加载上次附近地点
+				var nearByLocations = JSON.parse(localStorage.getItem('nearByLocations'));
+				if(!nearByLocations){
+					nearByLocations = {}
+				}
+				$rootScope.nearByLocations = nearByLocations;
+
+				var gaoDeLocation = JSON.parse(localStorage.getItem('gaoDeLocation'));
+				if(!gaoDeLocation){
+					gaoDeLocation = {
+						Lng: 0,
+						Lat: 0,
+						name: '未定位'
+					}
+				}else{
+					gaoDeLocation.name="上次定位："+gaoDeLocation.name;
+				}
+				$rootScope.gaoDeLocation = gaoDeLocation;
+			}
+		}
+	})
+
 	.factory('TakeOuts', function($http, $rootScope, $q) {
 		// Might use a resource here that returns a JSON array
 		var takeOuts = {};

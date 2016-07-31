@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
-	.run(function($ionicPlatform, $rootScope) {
+	.run(function($ionicPlatform) {
 		$ionicPlatform.ready(function() {
 			// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
 			// for form inputs)
@@ -20,32 +20,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 				// org.apache.cordova.statusbar required
 				StatusBar.styleDefault();
 			}
-			var init = function () {
-				//加载设置信息
-				var settingsStorage = JSON.parse(localStorage.getItem('settings'));
-				if(!settingsStorage){
-					settingsStorage = {
-						enableMeituan: true,
-						enableBaidu: true,
-						enableElm: true
-					}
-				}
-				$rootScope.settings = settingsStorage;
-
-				//加载定位信息
-				var locationStorage = JSON.parse(localStorage.getItem('locations'));
-				if(!locationStorage){
-					locationStorage = {
-						isLoad: false,
-						Lng: 0,
-						Lat: 0,
-						name: '未选定'
-					}
-				}
-				$rootScope.location = locationStorage;
-
-			};
-			init();
 		});
 	})
 

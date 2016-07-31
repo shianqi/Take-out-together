@@ -2,7 +2,9 @@ angular.module('starter.controllers', [])
 	/**
  	* 外卖页面控制器
  	*/
-	.controller('TakeOutsCtrl', function($scope, TakeOuts, $state) {
+	.controller('TakeOutsCtrl', function($scope, TakeOuts, $state, Loadings) {
+		Loadings.init();
+
 		TakeOuts.all().then(function (result) {
 			$scope.takeOuts = result;
 		});
@@ -10,6 +12,7 @@ angular.module('starter.controllers', [])
 		$scope.remove = function(takeOut) {
 			TakeOuts.remove(takeOut);
 		};
+
 		$scope.getLocation = function () {
 			$state.go('tab.location');
 		};
@@ -23,11 +26,16 @@ angular.module('starter.controllers', [])
 				$scope.$broadcast('scroll.refreshComplete');
 			});
 		};
+
+		$scope.addItems = function() {
+			//$scope.$broadcast('scroll.infiniteScrollComplete');
+		};
 	})
 
-	.controller('TakeOutDetailCtrl', function($scope, $stateParams, TakeOuts) {
-		$scope.takeOut = TakeOuts.get($stateParams.takeOutId);
+	.controller('TakeOutDetailCtrl', function($scope, $stateParams, TakeOuts, Loadings) {
+		Loadings.init();
 
+		$scope.takeOut = TakeOuts.get($stateParams.takeOutId);
 		$scope.transmit = function (url) {
 			location.href=url;
 		};
@@ -37,15 +45,9 @@ angular.module('starter.controllers', [])
 	/**
 	 * 定位页面控制器
      */
-	.controller('LocationCtrl', function($scope, $rootScope, $state) {
-		$rootScope.nearByLocations = {};
+	.controller('LocationCtrl', function($scope, $rootScope, $state, Loadings) {
+		Loadings.init();
 
-
-		$rootScope.gaoDeLocation = {
-			Lng: 0,
-			Lat: 0,
-			name: '未定位'
-		};
 
 		/**
 		 * 跳转到获取新坐标
@@ -152,8 +154,12 @@ angular.module('starter.controllers', [])
 					placeSearch.searchNearBy('', cpoint, 200, function(status, result) {
 						$rootScope.location.name = result.poiList.pois[0].name;
 						$rootScope.gaoDeLocation.name = result.poiList.pois[0].name;
-						localStorage.setItem('locations',JSON.stringify($rootScope.location));
 						$rootScope.nearByLocations = result.poiList.pois.slice(1);
+
+						localStorage.setItem('locations',JSON.stringify($rootScope.location));
+						localStorage.setItem('gaoDeLocation',JSON.stringify($rootScope.gaoDeLocation));
+						localStorage.setItem('nearByLocations',JSON.stringify($rootScope.nearByLocations));
+
 						$rootScope.$apply();
 					});
 				});
@@ -161,7 +167,9 @@ angular.module('starter.controllers', [])
 		};
 	})
 
-	.controller('AccountCtrl', function($scope, $rootScope) {
+	.controller('AccountCtrl', function($scope, $rootScope, Loadings) {
+		Loadings.init();
+
 		$scope.settingsChange = function () {
 			localStorage.setItem('settings',JSON.stringify($rootScope.settings));
 		};

@@ -1,4 +1,4 @@
-from web.views import  index,t
+from web.views import  index
 
 """TakeOutTogetherWeb URL Configuration
 
@@ -21,5 +21,4 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^index.html',index),
-    url(r't',t),
 ]

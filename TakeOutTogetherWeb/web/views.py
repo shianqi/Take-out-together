@@ -15,8 +15,6 @@ def index(request):
 
     list = []
 
-
-
     try:
         if  source.find('baidu') >=0:
             list_baidu = baidu_crawler.get_shop_list(lng , lat)
@@ -45,10 +43,6 @@ def index(request):
         print('ele except')
         pass
 
-
-
-
-
     list.sort(key=lambda  x:(x.weight))
     list.reverse()
 
@@ -57,9 +51,3 @@ def index(request):
     response["Access-Control-Allow-Origin"] = "*"
 
     return response
-
-
-
-
-def t(request):
-    return render_to_response('tiaozhuan.html')

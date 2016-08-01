@@ -11,11 +11,12 @@ def get_shop_list(lat, lng):
     headers = {'Content-Type': 'application/x-www-form-urlencoded', 'Accept-Encoding': 'gzip', 'User-Agent': 'okhttp/3.2.0'}
     response, content = http.request(url, method='GET', headers=headers)
     content = content.decode('utf-8')
-    content = str(content);
-    content = content.replace('true', '1');
-    content = content.replace('false', '0');
-    content = content.replace('null', '\"nl\"')
+    content = str(content)
+    content = content.replace('true', '1')
+    content = content.replace('false', '0')
+    content = content.replace('null', '0')
     # print(content)
+    print(content)
     content = eval(content);
     logo_url = 'https://fuss10.elemecdn.com{url}?imageMogr/quality/75/format/jpg/thumbnail/!96x96r/gravity/Center/crop/96x96/'
     native_url = 'eleme://restaurant?restaurant_id={id}&animation_type=1'

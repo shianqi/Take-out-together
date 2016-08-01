@@ -23,7 +23,7 @@
 			<a class="item item-icon-left item-icon-right" style="" ng-repeat="welfare in takeOut.welfare">
 				<i class="icon ion-bag"></i>
 				满 {{::welfare[0]||'unknow'}} 减 {{::welfare[1]||'unknow'}}
-				<i class="icon"><span class="discount">{{(1-welfare[1]/welfare[0]).toFixed(2)+"折"||'unknow'}}</span></i>
+				<i class="icon"><span class="discount">{{(1-welfare[1]/welfare[0]).toFixed(2)*10+"折"||'unknow'}}</span></i>
 			</a>
 
 			<div class="item row">

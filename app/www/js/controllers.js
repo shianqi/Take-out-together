@@ -174,4 +174,8 @@ angular.module('starter.controllers', [])
 		$scope.settingsChange = function () {
 			localStorage.setItem('settings',JSON.stringify($rootScope.settings));
 		};
+
+		$scope.goAboutUs = function () {
+
+		}
 	});

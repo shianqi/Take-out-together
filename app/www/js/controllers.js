@@ -4,11 +4,8 @@ angular.module('starter.controllers', [])
  	*/
 	.controller('TakeOutsCtrl', function($scope, TakeOuts, $state, Loadings) {
 		Loadings.init();
-
-		TakeOuts.all().then(function (result) {
-			$scope.takeOuts = result;
-			console.log(JSON.stringify(result));
-		});
+		$scope.allTakeOuts = [];
+		$scope.pageNumber = -1;
 
 		$scope.remove = function(takeOut) {
 			TakeOuts.remove(takeOut);
@@ -23,14 +20,30 @@ angular.module('starter.controllers', [])
          */
 		$scope.doRefresh = function () {
 			TakeOuts.all().then(function (result) {
-				$scope.takeOuts = result;
+				$scope.pageNumber = 0;
+				$scope.allTakeOuts = result;
+				$scope.takeOuts = $scope.allTakeOuts.slice(0,(++$scope.pageNumber)*10);
 				$scope.$broadcast('scroll.refreshComplete');
 			});
 		};
 
 		$scope.addItems = function() {
-			//$scope.$broadcast('scroll.infiniteScrollComplete');
-		};
+			if ($scope.pageNumber == -1) {
+				TakeOuts.all().then(function (result) {
+					$scope.allTakeOuts = result;
+					$scope.takeOuts = $scope.allTakeOuts.slice(0, 9);
+					$scope.$broadcast('scroll.infiniteScrollComplete');
+					$scope.pageNumber = 1;
+				});
+			} else {
+				//$ionicBackdrop.retain()
+				$scope.takeOuts = $scope.allTakeOuts.slice(0, (++$scope.pageNumber) * 10);
+				$scope.$broadcast('scroll.infiniteScrollComplete');
+			}
+			if ($scope.pageNumber * 10 > $scope.allTakeOuts.length) {
+				//$scope.$broadcast('scroll.infiniteScrollComplete');
+			}
+		}
 	})
 
 	.controller('TakeOutDetailCtrl', function($scope, $stateParams, TakeOuts, Loadings) {
@@ -46,7 +59,7 @@ angular.module('starter.controllers', [])
 	/**
 	 * 定位页面控制器
      */
-	.controller('LocationCtrl', function($scope, $rootScope, $state, Loadings) {
+	.controller('LocationCtrl', function($scope, $rootScope, $state, Loadings,Guide) {
 		Loadings.init();
 
 
@@ -162,13 +175,14 @@ angular.module('starter.controllers', [])
 						localStorage.setItem('nearByLocations',JSON.stringify($rootScope.nearByLocations));
 
 						$rootScope.$apply();
+						Guide.guide2();
 					});
 				});
 			}
 		};
 	})
 
-	.controller('AccountCtrl', function($scope, $rootScope, Loadings) {
+	.controller('AccountCtrl', function($scope, $rootScope, Loadings, $state) {
 		Loadings.init();
 
 		$scope.settingsChange = function () {
@@ -176,6 +190,6 @@ angular.module('starter.controllers', [])
 		};
 
 		$scope.goAboutUs = function () {
-
+			$state.go('tab.account-aboutUs');
 		}
 	});

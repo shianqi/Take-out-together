@@ -99,7 +99,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 						controller: 'AccountCtrl'
 					}
 				}
+			})
+
+			.state('tab.account-aboutUs', {
+				url: '/account/aboutUs',
+				views: {
+					'tab-account': {
+						templateUrl: 'templates/tab-account-aboutUs.html',
+						controller: 'AccountCtrl'
+					}
+				}
 			});
+
+
 
 		// if none of the above states are matched, use this as the fallback
 		$urlRouterProvider.otherwise('/tab/takeOuts');

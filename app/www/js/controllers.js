@@ -51,20 +51,11 @@ angular.module('starter.controllers', [])
 		Loadings.init();
 
 		$scope.takeOut = TakeOuts.get($stateParams.takeOutId);
-		$scope.transmit = function (url,source) {
+		$scope.transmit = function (url,web_url) {
 			location.href = url;
 			var t = Date.now();
 			setTimeout(function () {
-				var hr = '';
-				if (source == 'baidu') {
-					hr = 'http://waimai.baidu.com/';
-				}
-				if (source == 'meituan') {
-					hr = 'http://waimai.meituan.com/';
-				}
-				if (source == 'eleme') {
-					hr = 'https://www.ele.me/';
-				}
+				var hr = web_url;
 				if(Date.now()-t < 700){
 					location.href = hr;
 				}
@@ -202,6 +193,16 @@ angular.module('starter.controllers', [])
 	.controller('AccountCtrl', function($scope, $rootScope, Loadings, $state, Systems, $ionicPopup) {
 		Loadings.init();
 
+		$scope.checkNew = false;
+
+		Systems.getUpdataInformation($rootScope.settings.versionReal).then(function (result) {
+			if(result.flag==1){
+				$scope.checkNew =  true;
+			}else{
+				$scope.checkNew =  false;
+			}
+		});
+
 		$scope.settingsChange = function () {
 			localStorage.setItem('settings',JSON.stringify($rootScope.settings));
 		};
@@ -209,6 +210,8 @@ angular.module('starter.controllers', [])
 		$scope.goAboutUs = function () {
 			$state.go('tab.account-aboutUs');
 		};
+
+
 
 		$scope.checkVersion = function () {
 			Systems.getUpdataInformation($rootScope.settings.versionReal).then(function (result) {
@@ -230,7 +233,7 @@ angular.module('starter.controllers', [])
 				}else{
 					$ionicPopup.alert({
 						title: '已经是最新版本',
-						template: '已经是最新版本，无需更新。<br>当前版本：'+reset.ver
+						template: '已经是最新版本，无需更新。<br>当前版本：'+result.ver
 					});
 				}
 			});

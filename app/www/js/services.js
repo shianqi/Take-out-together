@@ -15,10 +15,10 @@ angular.module('starter.services', [])
 						enableBaidu: true,
 						enableElm: true,
 						enableImg: false,
-						versionReal: '1.0.0',
-						versionUser: '1.0.0'
+						versionReal: '0'
 					}
 				}
+				settingsStorage.versionReal = '1.0.0';
 				$rootScope.settings = settingsStorage;
 
 				//加载定位信息
@@ -67,25 +67,25 @@ angular.module('starter.services', [])
 					}
 				});
 
-				Systems.getUpdataInformation($rootScope.settings.versionUser).then(function (result) {
-					if(result.flag==1){
-						var confirmPopup = $ionicPopup.confirm({
-							title: '发现新版本',
-							cancelText:'取消',
-							okText: '更新',
-							template: '最新版本：'+result.ver+'<br>文件大小：'+result.size
-						});
-
-						confirmPopup.then(function(res) {
-							if(res) {
-								location.href = result.url;
-							} else {
-								$rootScope.settings.versionUser = result.ver;
-								localStorage.setItem('settings',JSON.stringify($rootScope.settings));
-							}
-						});
-					}
-				});
+				// Systems.getUpdataInformation($rootScope.settings.versionUser).then(function (result) {
+				// 	if(result.flag==1){
+				// 		var confirmPopup = $ionicPopup.confirm({
+				// 			title: '发现新版本',
+				// 			cancelText:'取消',
+				// 			okText: '更新',
+				// 			template: '最新版本：'+result.ver+'<br>文件大小：'+result.size
+				// 		});
+                //
+				// 		confirmPopup.then(function(res) {
+				// 			if(res) {
+				// 				location.href = result.url;
+				// 			} else {
+				// 				$rootScope.settings.versionUser = result.ver;
+				// 				localStorage.setItem('settings',JSON.stringify($rootScope.settings));
+				// 			}
+				// 		});
+				// 	}
+				// });
 			}
 		}
 	})

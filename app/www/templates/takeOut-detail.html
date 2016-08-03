@@ -5,13 +5,13 @@
   The Friends service returns an array of friend data
 -->
 <ion-view view-title="{{::takeOut.shop_name}}">
-	<ion-content>
+	<ion-content overflow-scroll="false" has-bouncing="true">
 		<div class="list card">
 
 			<div class="item item-thumbnail-left">
 				<img ng-if='!$root.settings.enableImg' ng-src="{{::takeOut.logo_url}}">
 				<img ng-if='$root.settings.enableImg' ng-src="{{::takeOut.source_img}}">
-				<h2>{{::takeOut.shop_name}}</h2>
+				<h2><img ng-src={{::takeOut.source_img}} width="14px" height="14px" style="margin-top: 3px; margin-right: 3px;"/>{{::takeOut.shop_name}}</h2>
 				<p class="icon icon-right ion-ios-cart" style="margin-top: 20px;">
 					<a class="subdued"> 月售：{{::takeOut.month_sale_num+"份"||'unknow'}}  </a>
 				</p>
@@ -42,7 +42,7 @@
 			</div>
 		</div>
 		<div class="padding">
-			<button class="button button-block button-positive" ng-click="transmit(takeOut.native_url)">
+			<button class="button button-block button-positive" ng-click="transmit(takeOut.native_url,takeOut.source)">
 				传 送 门
 			</button>
 		</div>

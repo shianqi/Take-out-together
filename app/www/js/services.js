@@ -14,7 +14,9 @@ angular.module('starter.services', [])
 						enableMeituan: true,
 						enableBaidu: true,
 						enableElm: true,
-						enableImg: false
+						enableImg: false,
+						versionReal: '1.0.0',
+						versionUser: '1.0.0'
 					}
 				}
 				$rootScope.settings = settingsStorage;
@@ -64,6 +66,26 @@ angular.module('starter.services', [])
 						});
 					}
 				});
+
+				Systems.getUpdataInformation($rootScope.settings.versionUser).then(function (result) {
+					if(result.flag==1){
+						var confirmPopup = $ionicPopup.confirm({
+							title: '发现新版本',
+							cancelText:'取消',
+							okText: '更新',
+							template: '最新版本：'+result.ver+'<br>文件大小：'+result.size
+						});
+
+						confirmPopup.then(function(res) {
+							if(res) {
+								location.href = result.url;
+							} else {
+								$rootScope.settings.versionUser = result.ver;
+								localStorage.setItem('settings',JSON.stringify($rootScope.settings));
+							}
+						});
+					}
+				});
 			}
 		}
 	})
@@ -109,12 +131,25 @@ angular.module('starter.services', [])
 		}
 	})
 
-	.factory('Systems', function ($http, $q) {
+	.factory('Systems', function ($http, $q, $rootScope) {
 		return{
 			getMessage: function () {
 				var deferred = $q.defer();
 				var href = 'http://183.175.12.160:8000/msg.html';
 				$http.get(href)
+					.success(function(message) {
+						deferred.resolve(message);
+					})
+					.finally(function() {
+						// Stop the ion-refresher from spinning
+					});
+				return deferred.promise;
+			},
+			getUpdataInformation: function (version) {
+				var deferred = $q.defer();
+				var href = 'http://183.175.12.160:8000/update.html?ver=';
+
+				$http.get(href+version)
 					.success(function(message) {
 						deferred.resolve(message);
 					})

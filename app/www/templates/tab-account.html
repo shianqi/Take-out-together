@@ -1,5 +1,5 @@
 <ion-view view-title="设置">
-	<ion-content>
+	<ion-content overflow-scroll="false" has-bouncing="true">
 		<ion-list>
 			<div class="item item-divider">
 				外卖支持
@@ -21,6 +21,9 @@
 			</ion-toggle>
 			<ion-item ng-click="goAboutUs()">
 				关于我们
+			</ion-item>
+			<ion-item ng-click="checkVersion()">
+				检查更新
 			</ion-item>
 		</ion-list>
 

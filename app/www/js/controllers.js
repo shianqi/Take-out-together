@@ -30,6 +30,7 @@ angular.module('starter.controllers', [])
 		$scope.addItems = function() {
 			if ($scope.pageNumber == -1) {
 				TakeOuts.all().then(function (result) {
+					console.log(JSON.stringify(result));
 					$scope.allTakeOuts = result;
 					$scope.takeOuts = $scope.allTakeOuts.slice(0, 9);
 					$scope.$broadcast('scroll.infiniteScrollComplete');
@@ -50,9 +51,25 @@ angular.module('starter.controllers', [])
 		Loadings.init();
 
 		$scope.takeOut = TakeOuts.get($stateParams.takeOutId);
-		$scope.transmit = function (url) {
-			location.href=url;
-		};
+		$scope.transmit = function (url,source) {
+			location.href = url;
+			var t = Date.now();
+			setTimeout(function () {
+				var hr = '';
+				if (source == 'baidu') {
+					hr = 'http://waimai.baidu.com/';
+				}
+				if (source == 'meituan') {
+					hr = 'http://waimai.meituan.com/';
+				}
+				if (source == 'eleme') {
+					hr = 'https://www.ele.me/';
+				}
+				if(Date.now()-t < 700){
+					location.href = hr;
+				}
+			}, 600);
+		}
 	})
 
 
@@ -182,7 +199,7 @@ angular.module('starter.controllers', [])
 		};
 	})
 
-	.controller('AccountCtrl', function($scope, $rootScope, Loadings, $state) {
+	.controller('AccountCtrl', function($scope, $rootScope, Loadings, $state, Systems, $ionicPopup) {
 		Loadings.init();
 
 		$scope.settingsChange = function () {
@@ -191,5 +208,31 @@ angular.module('starter.controllers', [])
 
 		$scope.goAboutUs = function () {
 			$state.go('tab.account-aboutUs');
+		};
+
+		$scope.checkVersion = function () {
+			Systems.getUpdataInformation($rootScope.settings.versionReal).then(function (result) {
+				if(result.flag==1){
+					var confirmPopup = $ionicPopup.confirm({
+						title: '发现新版本',
+						cancelText:'取消',
+						okText: '更新',
+						template: '最新版本：'+result.ver+'<br>文件大小：'+result.size
+					});
+
+					confirmPopup.then(function(res) {
+						if(res) {
+							location.href = result.url;
+						} else {
+
+						}
+					});
+				}else{
+					$ionicPopup.alert({
+						title: '已经是最新版本',
+						template: '已经是最新版本，无需更新。<br>当前版本：'+reset.ver
+					});
+				}
+			});
 		}
 	});

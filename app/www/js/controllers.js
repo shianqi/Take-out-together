@@ -220,7 +220,7 @@ angular.module('starter.controllers', [])
 						title: '发现新版本',
 						cancelText:'取消',
 						okText: '更新',
-						template: '最新版本：'+result.ver+'<br>文件大小：'+result.size
+						template: '最新版本：'+result.ver+'M<br>文件大小：'+result.size
 					});
 
 					confirmPopup.then(function(res) {

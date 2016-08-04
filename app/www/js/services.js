@@ -18,7 +18,7 @@ angular.module('starter.services', [])
 						versionReal: '0'
 					}
 				}
-				settingsStorage.versionReal = '1.0.0';
+				settingsStorage.versionReal = '1.0.1';
 				$rootScope.settings = settingsStorage;
 
 				//加载定位信息
@@ -135,7 +135,7 @@ angular.module('starter.services', [])
 		return{
 			getMessage: function () {
 				var deferred = $q.defer();
-				var href = 'http://183.175.12.160:8000/msg.html';
+				var href = 'http://tot.hupeng.wang:8765/msg.html';
 				$http.get(href)
 					.success(function(message) {
 						deferred.resolve(message);
@@ -147,7 +147,7 @@ angular.module('starter.services', [])
 			},
 			getUpdataInformation: function (version) {
 				var deferred = $q.defer();
-				var href = 'http://183.175.12.160:8000/update.html?ver=';
+				var href = 'http://tot.hupeng.wang:8765/update.html?ver=';
 
 				$http.get(href+version)
 					.success(function(message) {
@@ -178,7 +178,7 @@ angular.module('starter.services', [])
 				}
 				var lat = $rootScope.location.Lat;
 				var lng = $rootScope.location.Lng;
-				var href = 'http://183.175.12.160:8000/index.html?lat='+lat+'&lng='+lng+'&source='+source;
+				var href = 'http://tot.hupeng.wang:8765/index.html?lat='+lat+'&lng='+lng+'&source='+source;
 				var deferred = $q.defer();
 				$http.get(href)
 					.success(function(newTakeOuts) {

@@ -6,6 +6,10 @@ def class_to_json(obj):
     json_str = json.dumps(dict).replace('\\\\','\\')
     return json_str
 
+def dict_to_json(dict):
+    json_str = json.dumps(dict).replace('\\\\', '\\')
+    return json_str
+
 def class_to_dict(obj):
     '''把对象(支持单个对象、list、set)转换成字典'''
     is_list = obj.__class__ == [].__class__

@@ -13,3 +13,4 @@ class Shop_info:
     month_sale_num = 0
     score = 0
     source_img = ''
+    web_url = ''

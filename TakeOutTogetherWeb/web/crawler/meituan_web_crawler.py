@@ -6,7 +6,7 @@ from web.tool import weight_tool
 def get_shop_list(lat,lng):
     http = Http()
     url = 'http://waimai.meituan.com/ajax/poilist'
-    body = 'classify_type=cate_all&sort_type=0&price_type=0&support_online_pay=0&support_invoice=0&support_logistic=0&page_offset=1&page_size=20'
+    body = 'classify_type=cate_all&sort_type=0&price_type=0&support_online_pay=0&support_invoice=0&support_logistic=0&page_offset=1&page_size=50'
     cookie = str(encodeGeo(lat,lng))
     cookie = 'w_geoid=' + cookie
     headers = {'Content-Type': 'application/x-www-form-urlencoded', 'Accept-Encoding': 'gzip',
@@ -19,9 +19,11 @@ def get_shop_list(lat,lng):
     content = content.replace('null', '0')
     shops = eval(content).get('data').get('poiList')
     shop_info_list = []
+
     for shop in shops:
         shop_info = Shop_info()
         shop_info.source_img = './img/mt.png'
+        shop_info.web_url = 'http://i.waimai.meituan.com/restaurant/' + str(shop.get('wmPoi4Web').get('wm_poi_id'))
         shop_info.shop_name = shop.get('wmPoi4Web').get('name')
         shop_info.native_url = 'meituanwaimai://waimai.meituan.com/menu?restaurant_id=' + str(shop.get('wmPoi4Web').get('wm_poi_id')) + '&poiname='
         shop_info.deliver_time = shop.get('wmPoi4Web').get('avg_delivery_time')
@@ -34,6 +36,7 @@ def get_shop_list(lat,lng):
         shop_info.month_sale_num = shop.get('wmPoi4Web').get('month_sale_num')
         shop_info.score = shop.get('wmPoi4Web').get('wm_poi_score')
         discount_detail_list = shop.get('actInfoVo').get('full_discount_logo')
+
         if discount_detail_list == 0:
             continue
         discount_detail_list = discount_detail_list.get('discount_detail')

@@ -8,7 +8,7 @@ from math import log10
 __base32 = '0123456789bcdefghjkmnpqrstuvwxyz'
 __decodemap = { }
 
-def post(lat, lng, index = 0):
+def post(lat, lng, index = 1):
     http = httplib2.Http()
     url = 'http://i.waimai.meituan.com/home?lat={lat}&lng={lng}'
     url = url.replace('{lat}', str(lat))

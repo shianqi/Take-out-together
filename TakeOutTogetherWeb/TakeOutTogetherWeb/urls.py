@@ -1,4 +1,4 @@
-from web.views import  index
+from web.views import  index,web_login_html,web_login_py,message,update
 
 """TakeOutTogetherWeb URL Configuration
 
@@ -21,4 +21,11 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^index.html',index),
+    url(r'^msg.html',message),
+    url(r'^update.html', update),
+
+
+    url(r'^web_login.html',web_login_html),
+    url(r'^web_login.py',web_login_py),
+    # url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT,}),
 ]

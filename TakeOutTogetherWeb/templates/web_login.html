@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>user login</title>
+</head>
+<body>
+    <h2>外卖聚合平台后台管理系统</h2>
+    <form action='web_login.py' method="post">
+        {% csrf_token %}
+        <input name="username"><br>
+        <input name="password" type="password"><br>
+        <input type="submit" value="登录">
+    </form>
+    {{ login_msg }}
+</body>
+</html>

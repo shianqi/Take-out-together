@@ -5,7 +5,7 @@ import re
 from web.tool import weight_tool
 
 def get_shop_list(lat, lng):
-    url = 'https://m.ele.me/restapi/v4/restaurants?type=geohash&geohash={geohash}1&offset=0&limit=20&extras[]=food_activity&extras[]=restaurant_activity'
+    url = 'https://m.ele.me/restapi/v4/restaurants?type=geohash&geohash={geohash}1&offset=0&limit=50&extras[]=food_activity&extras[]=restaurant_activity'
     url = url.replace('{geohash}', encodeGeo(lat, lng))
     http = httplib2.Http();
     headers = {'Content-Type': 'application/x-www-form-urlencoded', 'Accept-Encoding': 'gzip', 'User-Agent': 'okhttp/3.2.0'}
@@ -16,7 +16,7 @@ def get_shop_list(lat, lng):
     content = content.replace('false', '0')
     content = content.replace('null', '0')
     # print(content)
-    print(content)
+
     content = eval(content);
     logo_url = 'https://fuss10.elemecdn.com{url}?imageMogr/quality/75/format/jpg/thumbnail/!96x96r/gravity/Center/crop/96x96/'
     native_url = 'eleme://restaurant?restaurant_id={id}&animation_type=1'
@@ -24,6 +24,7 @@ def get_shop_list(lat, lng):
     for shop in content:
         shop_info = Shop_info()
         shop_info.source_img = './img/elm.png'
+        shop_info.web_url = 'https://m.ele.me/shop/' + str(shop.get('id'))
         shop_info.score = shop.get('rating')
         shop_info.month_sale_num = shop.get('month_sales')
         shop_info.shop_id = 'ELE' + str(shop.get('id'))

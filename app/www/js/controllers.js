@@ -51,16 +51,12 @@ angular.module('starter.controllers', [])
 		Loadings.init();
 
 		$scope.takeOut = TakeOuts.get($stateParams.takeOutId);
-		$scope.transmit = function (url,web_url) {
+		$scope.transmitApp = function (url) {
 			location.href = url;
-			var t = Date.now();
-			setTimeout(function () {
-				var hr = web_url;
-				if(Date.now()-t < 700){
-					location.href = hr;
-				}
-			}, 600);
-		}
+		};
+		$scope.transmitWeb = function (web_url) {
+			location.href = web_url;
+		};
 	})
 
 

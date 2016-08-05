@@ -18,7 +18,7 @@ angular.module('starter.services', [])
 						versionReal: '0'
 					}
 				}
-				settingsStorage.versionReal = '1.0.1';
+				settingsStorage.versionReal = '1.0.2';
 				$rootScope.settings = settingsStorage;
 
 				//加载定位信息

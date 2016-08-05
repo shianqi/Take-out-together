@@ -1,0 +1,33 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.imudges.takeOutTogether"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.imudges.takeOutTogether"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.imudges.takeOutTogether"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.imudges.takeOutTogether"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.imudges.takeOutTogether"
+        },
+        "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "com.imudges.takeOutTogether"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.imudges.takeOutTogether"
+        }
+    },
+    "dependent_plugins": {}
+}

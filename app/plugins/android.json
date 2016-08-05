@@ -8,24 +8,33 @@
     },
     "installed_plugins": {
         "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.imudges.takeOutTogether"
+            "PACKAGE_NAME": "com.ionicframework.myapp948502"
         },
         "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.imudges.takeOutTogether"
+            "PACKAGE_NAME": "com.ionicframework.myapp948502"
         },
         "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "com.imudges.takeOutTogether"
+            "PACKAGE_NAME": "com.ionicframework.myapp948502"
         },
         "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "com.imudges.takeOutTogether"
+            "PACKAGE_NAME": "com.ionicframework.myapp948502"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.ionicframework.myapp948502"
         },
         "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "com.imudges.takeOutTogether"
+            "PACKAGE_NAME": "com.ionicframework.myapp948502"
+        },
+        "cordova-hot-code-push-plugin": {
+            "PACKAGE_NAME": "com.ionicframework.myapp948502"
+        },
+        "cordova-hot-code-push-local-dev-addon": {
+            "PACKAGE_NAME": "com.ionicframework.myapp948502"
         },
         "cordova-plugin-crosswalk-webview": {
             "PACKAGE_NAME": "com.imudges.takeOutTogether"
         },
-        "cordova-plugin-whitelist": {
+        "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.imudges.takeOutTogether"
         }
     },

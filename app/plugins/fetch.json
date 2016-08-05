@@ -15,6 +15,14 @@
         "is_top_level": true,
         "variables": {}
     },
+    "cordova-plugin-whitelist": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-whitelist"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
     "cordova-plugin-splashscreen": {
         "source": {
             "type": "registry",
@@ -39,6 +47,22 @@
         "is_top_level": true,
         "variables": {}
     },
+    "cordova-hot-code-push-plugin": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-hot-code-push-plugin"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-hot-code-push-local-dev-addon": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-hot-code-push-local-dev-addon"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
     "cordova-plugin-crosswalk-webview": {
         "source": {
             "type": "registry",
@@ -47,18 +71,10 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-compat": {
+    "cordova-plugin-inappbrowser": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-compat"
-        },
-        "is_top_level": false,
-        "variables": {}
-    },
-    "cordova-plugin-whitelist": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-whitelist"
+            "id": "cordova-plugin-inappbrowser"
         },
         "is_top_level": true,
         "variables": {}

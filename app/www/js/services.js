@@ -18,7 +18,7 @@ angular.module('starter.services', [])
 						versionReal: '0'
 					}
 				}
-				settingsStorage.versionReal = '1.1.0';
+				settingsStorage.versionReal = '1.2.0';
 				$rootScope.settings = settingsStorage;
 
 				//加载定位信息
@@ -51,7 +51,7 @@ angular.module('starter.services', [])
 					gaoDeLocation.name="上次定位："+gaoDeLocation.name;
 				}
 				$rootScope.gaoDeLocation = gaoDeLocation;
-				if($rootScope.settings.fristUse){
+				if($rootScope.settings.fristUse == true){
 					Guide.guide1();
 				}
 				Systems.getMessage().then(function (result) {

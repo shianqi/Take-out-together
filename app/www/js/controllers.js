@@ -30,7 +30,6 @@ angular.module('starter.controllers', [])
 		$scope.addItems = function() {
 			if ($scope.pageNumber == -1) {
 				TakeOuts.all().then(function (result) {
-					console.log(JSON.stringify(result));
 					$scope.allTakeOuts = result;
 					$scope.takeOuts = $scope.allTakeOuts.slice(0, 9);
 					$scope.$broadcast('scroll.infiniteScrollComplete');
@@ -47,6 +46,9 @@ angular.module('starter.controllers', [])
 		}
 	})
 
+	/**
+	 * 外卖控制器
+	 */
 	.controller('TakeOutDetailCtrl', function($scope, $stateParams, TakeOuts, Loadings) {
 		Loadings.init();
 
@@ -180,7 +182,9 @@ angular.module('starter.controllers', [])
 						localStorage.setItem('nearByLocations',JSON.stringify($rootScope.nearByLocations));
 
 						$rootScope.$apply();
-						Guide.guide2();
+						if($rootScope.settings.fristUse == true){
+							Guide.guide2();
+						}
 					});
 				});
 			}

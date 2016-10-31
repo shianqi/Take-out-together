@@ -27,4 +27,11 @@ class Admin(models.Model):
     username = models.CharField(max_length=250)
     password = models.CharField(max_length=250)
 
+class Access_log(models.Model):
+    access_time = models.DateTimeField(auto_now=True)
+    ip_address = models.CharField(max_length=30)
+    location = models.CharField(max_length=100)
+    user_agent = models.CharField(max_length=100)
 
+    def __str__(self):
+        return 'id:' + str(self.id) + '&access_time:' + str(self.access_time) + '&ip_address:' + self.ip_address + '&location:' + self.location + '&user_agent:' + self.user_agent

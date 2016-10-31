@@ -1,3 +1,5 @@
+import re
+
 from web.tool.meituan_tool import encodeGeo
 from httplib2 import Http
 from web.crawler.shop_info import Shop_info
@@ -12,7 +14,7 @@ def get_shop_list(lat,lng):
     headers = {'Content-Type': 'application/x-www-form-urlencoded', 'Accept-Encoding': 'gzip',
                'User-Agent': 'okhttp/3.2.0', 'Cookie': cookie}
     response, content = http.request(url, method='POST', body=body, headers=headers)
-
+    print(content.decode('utf-8'))
     content = content.decode('utf-8')
     content = content.replace('true','1')
     content = content.replace('false', '0')
@@ -35,19 +37,25 @@ def get_shop_list(lat,lng):
         shop_info.shop_id = 'MT' + str(shop.get('wmPoi4Web').get('wm_poi_id'))
         shop_info.month_sale_num = shop.get('wmPoi4Web').get('month_sale_num')
         shop_info.score = shop.get('wmPoi4Web').get('wm_poi_score')
-        discount_detail_list = shop.get('actInfoVo').get('full_discount_logo')
+        discount_detail_list = shop.get('actInfoVos')
 
         if discount_detail_list == 0:
             continue
-        discount_detail_list = discount_detail_list.get('discount_detail')
+
         welfare_list = []
         for discount_detail in discount_detail_list:
-            temp_welfare = []
-            x = discount_detail.get('limit_price')
-            y = discount_detail.get('discount')
-            temp_welfare.append(x)
-            temp_welfare.append(y)
-            welfare_list.append(temp_welfare)
+            if not discount_detail.get('actId') == 2:
+                continue
+            welfare_msg = discount_detail.get('text')
+            welfare_str_list = re.findall(r"\d+\.?\d*", welfare_msg)
+            welfare_list = []
+            for i in range(int(len(welfare_str_list) / 2)):
+                temp_welface_list = []
+                x = int(welfare_str_list[i * 2])
+                y = int(welfare_str_list[i * 2 + 1])
+                temp_welface_list.append(x)
+                temp_welface_list.append(y)
+                welfare_list.append(temp_welface_list)
         shop_info.welfare = welfare_list
         shop_info.weight = weight_tool.weight_cal(shop_info.welfare, shop_info.take_out_price, shop_info.take_out_cost)
         shop_info_list.append(shop_info)

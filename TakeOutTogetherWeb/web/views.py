@@ -1,18 +1,24 @@
 from django.views.decorators.csrf import csrf_exempt
 
-from web.tool import json_tool
+from web.tool import json_tool, ip_service
 from django.http import HttpResponse
 
 from django.shortcuts import render_to_response
 
 from web.models import Admin
 from django.template import RequestContext
-from web.models import Message,Update
+from web.models import Message, Update, Access_log
 from web.tool.bean import MessageModel,UpdateModel
 from web.crawler.crawler import get_shop_list
 
 # Create your views here.
 def index(request):
+    access_log = Access_log()
+    access_log.ip_address = request.META.get('REMOTE_ADDR')
+    access_log.user_agent = request.META.get('HTTP_USER_AGENT')
+    access_log.location = ip_service.get_location(access_log.ip_address)
+    access_log.save()
+
     # lat lng 为经纬度
     lng = request.GET.get('lng')
     lat = request.GET.get('lat')
@@ -110,4 +116,4 @@ def web_login_py(request):
     else:
         request.session['username'] = username
         request.session['user_id'] = admins[0].id
-        return render_to_response('web_admin.html',{'username':username},context_instance=RequestContext(request))
+        return render_to_response('web_admin.html', {'username': username}, context_instance=RequestContext(request))

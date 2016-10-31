@@ -50,7 +50,7 @@ def get_shop_list(lat, lng):
                     discount_list.append(temp_welface_list)
                 shop_info.welfare = discount_list
                 shop_info.source = 'eleme'
-                shop_info.weight = weight_tool.weight_cal(shop_info.welfare, shop_info.take_out_price,shop_info.take_out_cost)
+                shop_info.weight = weight_tool.weight_cal(shop_info.welfare, shop_info.take_out_price, shop_info.take_out_cost)
                 shop_info_list.append(shop_info)
     return shop_info_list
 

@@ -7,7 +7,7 @@ def get_shop_list(lat, lng):
     data = meituan_tool.post(lat, lng)
     data = data.replace('false', '0')
     data = data.replace('true', '1')
-    # print(data)
+    print(data)
     data = eval(data)
     shops = data.get('poilist')
     shop_info_list = []

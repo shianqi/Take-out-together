@@ -20,11 +20,11 @@ def post(lat, lng, index = 1):
     cookie = cookie.replace('{lng}', str(lng * 1000000))
     cookie = cookie.replace('{geohash}', encodeGeo(lat, lng))
 
-    # print(cookie)
+    print(cookie)
     headers = {'Content-Type': 'application/x-www-form-urlencoded', 'Accept-Encoding': 'gzip',
                'User-Agent': 'okhttp/3.2.0', 'Cookie' : cookie}
     response, content = http.request(url, method='POST', body=body, headers=headers)
-    # content = content.decode('utf-8')
+    content = content.decode('utf-8')
     content = eval(content)
     data = content.get('data')
     stepLength = (len(data) & 7) + 1

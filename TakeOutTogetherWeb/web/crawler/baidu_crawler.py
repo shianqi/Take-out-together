@@ -9,7 +9,8 @@ def get_shop_list(lat, lng):
     lng = str(lng)
     request_time = str(int(time.time()*1000))
     lat, lng = loc_tool.gaode_to_baidu09mc(lat,lng)
-
+    print(lat)
+    print(lng)
     http = httplib2.Http()
     url = 'http://client.waimai.baidu.com/shopui/na/v1/cliententry?resid=1001&from=na-android&os=5.1.1&sv=3.9.1&cuid=E8E7DA5EEF8BD6A7BEE5918C36C96DDD%7C273344620823668&model=2014813&screen=720*1280&channel=com.xiaomi&loc_lat={lat}&loc_lng={lng}&city_id=&aoi_id=&address=&net_type=wifi&isp=46007&request_time={request_time}'
 
@@ -17,13 +18,15 @@ def get_shop_list(lat, lng):
     url = url.replace('{lat}',str(lng))
     url = url.replace('{lng}',str(lat))
 
+    # url = "http://client.waimai.baidu.com/shopui/na/v1/cliententry?resid=1001&from=na-android&os=5.1.1&sv=3.9.1&cuid=E8E7DA5EEF8BD6A7BEE5918C36C96DDD%7C273344620823668&model=2014813&screen=720*1280&channel=com.xiaomi&loc_lat=4957720.626078&loc_lng=1.2434005435403E7&city_id=&aoi_id=&address=&net_type=wifi&isp=46007&request_time=1477714678412"
 
     body = 'lat=0.0&lng=0.0&count=50&page=1&bduss=NA&stoken=bdwm&sortby=&taste=&city_id=&promotion=&return_type=launch'
     headers = {'Content-Type': 'application/x-www-form-urlencoded', 'Accept-Encoding': 'gzip', 'User-Agent': 'okhttp/3.2.0'}
     response, content = http.request(url, method='POST', body=body, headers=headers)
     content = content.decode('utf-8')
+    print(content)
     content = eval(content)
-    # print(content.get('result').get('shop_info')[0].get('shop_name'))
+    print(content.get('result').get('shop_info')[0].get('shop_name'))
     shops = content.get('result').get('shop_info')
     shop_info_list = []
     for shop in shops:
